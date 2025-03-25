@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO - Justice for All</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            padding-top: 60px;
+        }
+
+        /* From Uiverse.io by zjssun */
+        .button {
+            position: relative;
+            padding: 10px 22px;
+            border-radius: 6px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            background-color: #7d2ae8;
+            transition: all 0.2s ease;
+        }
+
+        .button:active {
+            transform: scale(0.96);
+        }
+
+        .button:before,
+        .button:after {
+            position: absolute;
+            content: "";
+            width: 150%;
+            left: 50%;
+            height: 100%;
+            transform: translateX(-50%);
+            z-index: -1000;
+            background-repeat: no-repeat;
+        }
+
+        .button:hover:before {
+            top: -70%;
+            background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+            background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+                10% 10%, 18% 18%;
+            background-position: 50% 120%;
+            animation: greentopBubbles 0.6s ease;
+        }
+
+        @keyframes greentopBubbles {
+            0% {
+                background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+                    40% 90%, 55% 90%, 70% 90%;
+            }
+
+            50% {
+                background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+                    50% 50%, 65% 20%, 90% 30%;
+            }
+
+            100% {
+                background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+                    50% 40%, 65% 10%, 90% 20%;
+                background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+            }
+        }
+
+        .button:hover::after {
+            bottom: -70%;
+            background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+            background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+            background-position: 50% 0%;
+            animation: greenbottomBubbles 0.6s ease;
+        }
+
+        @keyframes greenbottomBubbles {
+            0% {
+                background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+                    70% -10%, 70% 0%;
+            }
+
+            50% {
+                background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+                    105% 0%;
+            }
+
+            100% {
+                background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+                    110% 10%;
+                background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+            }
+        }
+
+        .headline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            height: 90px;
+            width: 90px;
+        }
+
+        @media (max-width: 768px) {
+           
+
+            .logo {
+                height: 70px;
+                width: 70px;
+                margin-bottom: 5px;
+            }
+
+
+
+            .button {
+                padding:10px !important;
+                text-align: center;
+            }
+            .h{
+                font-size:15px !important;
+            }
+        }
+
+        /* Slight scale effect on button hover */
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 fixed w-full shadow-md flex justify-between items-center z-50 top-0 left-0 right-0 ">
+        <img src="Adobe Express - file (1) (1).png" alt="LOGO" srcset="" class="logo">
+        <h1 class="text-xl font-bold h">PAKISTAN DARAWAR ITEHAD</h1>
+        <ul class="flex gap-6">
+
+            <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
+                    class="button">Sheet</a></li>
+            <li><a href="" class="button">DashBoard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Issues Section -->
+    <section id="issues" class="p-10 text-center mt-10">
+        <h2 class="text-3xl font-bold">ALL FORMS</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="KIDNAP.jpg" class="rounded w-full h-40 object-cover" alt="Kidnap">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCmPLQS_cUkVzOw-ejtxVXXwoP6YRmea_dtCLTF4WQZ854kA/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">KIDNAP REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="Force conversion.webp" class="rounded w-full h-40 object-cover" alt="Forced Conversion">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeL9Z24-llAWnTTRqB-GIm5OlsMG00w6WG-G2yrTykDXlFbcQ/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">FORCE CONVERISON
+                    REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+
+                <img src="sucide.webp" class="rounded w-full h-40 object-cover" alt="Suicide">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsljgM-9ELu6mmgrmlWBcaiKElk4tM_DR9bmQZxjav1Juq5Q/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">SUCIDE CASE REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="Murder.webp" class="rounded w-full h-40 object-cover" alt="Murder">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_A_CFsv2ACrRFCjvh_0YqMOJVxQCQ8dU_i8qMP5KpimhJA/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">MURDER REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="child marrige.webp" class="rounded w-full h-40 object-cover" alt="Child Marriage">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdy7wyCltersWtRDcUioanZvvJ77XXN6bb_FoR7J6v15NWYWw/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">CHILD MARRIAGE
+                    REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="LAND GRABBER.webp" class="rounded w-full h-40 object-cover" alt="Land Grabber">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdy7wyCltersWtRDcUioanZvvJ77XXN6bb_FoR7J6v15NWYWw/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">LAND GRABBER REPORT</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <img src="others.webp" class="rounded w-full h-40 object-cover" alt="Others">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkv9rE3QNqhQpbAGAwaixrz-8ISrz1zjyJv9NceggyGKFixA/viewform?usp=header"
+                    class="block mt-2 bg-red-500 px-4 py-2 rounded text-white">OTHERS PROBLEM
+                    REPORT</a>
+            </div>
+        </div>
+    </section>
+
+    <center>ALL CREDITS PAKISTAN DARAWAR ITEHAD TEAM @2025 </center>
+
+</body>
+
+</html>
