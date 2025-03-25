@@ -101,6 +101,11 @@
     </section>
 
     <script>
+        var password = "5500"; // Change this to your desired password
+        var userInput = prompt("Enter Password:");
+        if (userInput !== password) {
+          document.body.innerHTML = "<h2 style='text-align:center;'>Access Denied</h2>";
+        }
         let allData = [];
         async function fetchData() {
             const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
