@@ -8,11 +8,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      
 
-        /* From Uiverse.io by zjssun */
-        
         @media (max-width: 640px) {
             .filter-container {
                 flex-direction: column;
@@ -28,42 +32,82 @@
                 font-size: 1.20rem !important;
             }
         }
-       
+        body {
+    background: url("Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 30, 48, 0.8); /* Dark overlay to improve text readability */
+    z-index: -1;
+}
 
         /* Slight scale effect on button hover */
     </style>
 </head>
 
-<body class="bg-gray-900 text-white">
+<body class=" text-white">
   
 
 
 
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
-              <img src="Adobe Express - file (1) (1).png" class="h-10" alt="Flowbite Logo" />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-500 responsive-name">PAKISTAN DARAWAR ITEHAD</span>
-          </a>
-          <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-              <span class="sr-only">Open main menu</span>-
-              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-              </svg>
-          </button>
-          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SHEET</a>
-              </li>
-              <li>
-                <a href="dashboard.html" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">DASHBOARD</a>
-              </li>
+    <div class="m-nav">
+        <div class="wrapper mt-10">
+            <!-- Navigation bar with radio buttons for tab functionality -->
+            <nav>
+               <!-- Home tab (default selected) -->
+               <input type="radio" name="tab" id="home" checked>
+               <!-- Inbox tab -->
+               <input type="radio" name="tab" id="inbox">
+               <!-- Contact tab -->
+               <input type="radio" name="tab" id="contact">
+               <!-- Heart tab -->
+               <input type="radio" name="tab" id="heart">
+               <!-- About tab -->
+               <input type="radio" name="tab" id="about">
+            
+               <!-- Labels with icons and links for each tab -->
+               <label for="home" class="home">
+                <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
+            </label>
+               <label for="inbox" class="inbox">
+                <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">
+                    <i class="fas fa-file-excel"></i> Sheet
+                </a>
+            </label>
+            
+            
              
-            </ul>
-          </div>
+             
+            <label for="contact" class="contact">
+                <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
+            </label>
+            
+               
+               <label for="heart" class="heart">
+                <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+            </label>
+            
+               
+            <label for="about" class="about">
+                <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
+            </label>
+            
+               <!-- Tab indicator for the elastic animation -->
+               <div class="tab"></div>
+            
+            </nav>
+         </div>
         </div>
-      </nav>
 
   
     <!-- Navbar -->
@@ -116,8 +160,14 @@
     </section>
 
     <center>ALL CREDITS PAKISTAN DARAWAR ITEHAD TEAM @2025 </center>
-  
+    <script>
+        var password = "5500"; // Change this to your desired password
+        var userInput = prompt("Enter Password:");
+        if (userInput !== password) {
+          document.body.innerHTML = "<h2 style='text-align:center;'>Access Denied</h2>";
+        }
+      </script>
       
 </body>
-
+<script src="nav-script.js"></script>
 </html>

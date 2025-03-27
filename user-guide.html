@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Justice for All</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <style>
+        body {
+            background: url("Background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 30, 48, 0.8);
+            z-index: -1;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #facc15;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .faq p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="m-nav">
+        <div class="wrapper mt-10">
+            <nav>
+                <input type="radio" name="tab" id="home">
+                <input type="radio" name="tab" id="inbox">
+                <input type="radio" name="tab" id="contact">
+                <input type="radio" name="tab" id="heart">
+                <input type="radio" name="tab" id="about" checked>
+            
+                <label for="home" class="home">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                </label>
+                <label for="inbox" class="inbox">
+                    <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">
+                        <i class="fas fa-file-excel"></i> Sheet
+                    </a>
+                </label>
+                <label for="contact" class="contact">
+                    <a href="stats.html"><i class="fas fa-chart-pie"></i> Stats</a>
+                </label>
+                <label for="heart" class="heart">
+                    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </label>
+                <label for="about" class="about">
+                    <a href="user-guide.html"><i class="fa fa-book"></i> User Guide</a>
+                </label>
+                <div class="tab"></div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- User Guide Content -->
+    <div class="container text-center">
+        <h1 class="text-4xl font-bold text-blue-400 my-6">📖 User Guide</h1>
+
+        <div class="section">
+            <h2>🏠 Home Page</h2>
+            <p>The home page provides an overview of the NGO's mission, recent updates, and quick navigation to key features.</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Case Statistics</h2>
+            <p>The statistics page displays a summary of case reports with visual charts showing different categories such as murder, suicide, forced conversions, and more.</p>
+        </div>
+
+        <div class="section">
+            <h2>📂 Case Reports</h2>
+            <p>You can access all reported cases through the linked Google Sheet. Click on the 'Sheet' tab in the navigation menu to view or update case records.</p>
+        </div>
+
+        <div class="section">
+            <h2>📈 Dashboard</h2>
+            <p>The dashboard presents a detailed breakdown of cases, trends, and important updates in a structured format for easier analysis.</p>
+        </div>
+
+        <div class="section faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            <p><strong>Q: How do I download a report?</strong><br>A: Click on the 'Download PDF' button available in the case report or dashboard section.</p>
+            <p><strong>Q: Can I add new cases?</strong><br>A: Yes, new cases can be added via the Google Sheet link available under 'Sheet'.</p>
+            <p><strong>Q: Who can access the dashboard?</strong><br>A: Only authorized personnel can access and edit case data.</p>
+        </div>
+    </div>
+
+    <script src="nav-script.js"></script>
+</body>
+</html>

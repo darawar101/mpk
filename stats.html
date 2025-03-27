@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Statistics - Justice for All</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <style>
+        body {
+            background: #0a0f1a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            background: linear-gradient(135deg, #1e40af, #9333ea);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: auto;
+        }
+       body {
+    background: url("Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 30, 48, 0.8); /* Dark overlay to improve text readability */
+    z-index: -1;
+}
+
+    </style>
+</head>
+<div class="m-nav">
+<div class="wrapper">
+    <!-- Navigation bar with radio buttons for tab functionality -->
+    <nav>
+       <!-- Home tab (default selected) -->
+       <input type="radio" name="tab" id="home" checked>
+       <!-- Inbox tab -->
+       <input type="radio" name="tab" id="inbox">
+       <!-- Contact tab -->
+       <input type="radio" name="tab" id="contact">
+       <!-- Heart tab -->
+       <input type="radio" name="tab" id="heart">
+       <!-- About tab -->
+       <input type="radio" name="tab" id="about">
+    
+       <!-- Labels with icons and links for each tab -->
+       <label for="home" class="home">
+        <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
+    </label>
+       <label for="inbox" class="inbox">
+        <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">
+            <i class="fas fa-file-excel"></i> Sheet
+        </a>
+    </label>
+    
+    
+     
+     
+    <label for="contact" class="contact">
+        <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
+    </label>
+    
+       
+       <label for="heart" class="heart">
+        <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+    </label>
+    
+       
+    <label for="about" class="about">
+        <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
+    </label>
+    
+       <!-- Tab indicator for the elastic animation -->
+       <div class="tab"></div>
+    
+    </nav>
+ </div>
+</div>
+<body class="p-8">
+    <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-6xl font-bold text-blue-400 mb-6">📊 Case Statistics</h1>
+
+        <div class="mt-10">
+            <h2 class="text-3xl font-semibold">Total Cases: 
+                <span id="totalCases" class="text-yellow-400 text-5xl font-bold">0</span>
+            </h2>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Murder</h3>
+                <p id="murderCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Suicide</h3>
+                <p id="suicideCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Kidnap</h3>
+                <p id="kidnapCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Forced Conversion</h3>
+                <p id="conversionCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Land Grabber</h3>
+                <p id="landGrabberCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Child Marriage</h3>
+                <p id="childMarriageCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Others</h3>
+                <p id="othersCount" class="text-5xl font-bold">0</p>
+            </div>
+        </div>
+
+        <div class="mt-12 flex justify-center chart-container">
+            <canvas id="caseChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
+            const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
+            const sheetNames = ["Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
+            
+            try {
+                const response = await fetch(url);
+                const json = await response.json();
+                const caseCounts = {};
+                
+                json.valueRanges.forEach((sheet, index) => {
+                    caseCounts[sheetNames[index]] = sheet.values ? sheet.values.length - 1 : 0;
+                });
+                
+                document.getElementById("totalCases").innerText = Object.values(caseCounts).reduce((a, b) => a + b, 0);
+                document.getElementById("murderCount").innerText = caseCounts["Murder"] || 0;
+                document.getElementById("suicideCount").innerText = caseCounts["Sucide"] || 0;
+                document.getElementById("kidnapCount").innerText = caseCounts["Kidnap"] || 0;
+                document.getElementById("conversionCount").innerText = caseCounts["Force Conversion"] || 0;
+                document.getElementById("landGrabberCount").innerText = caseCounts["Land Grabber"] || 0;
+                document.getElementById("childMarriageCount").innerText = caseCounts["Child Marrige"] || 0;
+                document.getElementById("othersCount").innerText = caseCounts["Others Cases"] || 0;
+                
+                renderChart(caseCounts);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        function renderChart(caseCounts) {
+            const ctx = document.getElementById('caseChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(caseCounts),
+                    datasets: [{
+                        label: 'Number of Cases',
+                        data: Object.values(caseCounts),
+                        backgroundColor: ['#ef4444', '#facc15', '#22c55e', '#a855f7', '#ff7f50', '#008080', '#4b0082'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: 'white' } },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+        }
+
+        fetchData();
+    </script>
+   <script src="nav-script.js"></script>
+    
+    
+        
+</body>
+</html>

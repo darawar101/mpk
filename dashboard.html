@@ -8,6 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @media (max-width: 640px) {
             .filter-container {
@@ -26,46 +29,109 @@
                 font-size: 1.20rem !important;
             }
         }
+
+        body {
+            background: url("Background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 30, 48, 0.8);
+            /* Dark overlay to improve text readability */
+            z-index: -1;
+        }
+
+        .table-container table {
+            background: rgba(30, 30, 30, 0.9);
+            /* Darker background for better contrast */
+            color: white;
+            border-collapse: collapse;
+        }
+
+        .table-container th {
+            background: rgba(50, 50, 50, 0.9);
+            /* Darker header */
+            color: white;
+        }
+
+        .table-container td {
+            background: rgba(40, 40, 40, 0.8);
+            /* Slightly lighter than the header */
+            color: white;
+            border: 1px solid rgba(100, 100, 100, 0.5);
+        }
+
+        .table-container tr:hover {
+            background: rgba(70, 70, 70, 0.9);
+            /* Highlight row on hover */
+        }
+        td:nth-child(2), th:nth-child(2) { 
+    min-width: 120px; /* Adjust width as needed */
+    text-align: center; /* Center align for better readability */
+}
+
     </style>
 </head>
 
 <body class="bg-gray-900 text-white">
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="Adobe Express - file (1) (1).png" class="h-10" alt="Flowbite Logo" />
-                <span
-                    class="self-center text-2xl font-semibold whitespace-nowrap text-blue-500 responsive-name">PAKISTAN
-                    DARAWAR ITEHAD</span>
-            </a>
-            <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-default" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>-
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-            </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
-                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                            aria-current="page">SHEET</a>
-                    </li>
-                    <li>
-                        <a href="dashboard.html"
-                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                            aria-current="page">DASHBOARD</a>
-                    </li>
+    <div class="m-nav ">
+        <div class="wrapper mt-10">
+            <!-- Navigation bar with radio buttons for tab functionality -->
+            <nav>
+                <!-- Home tab (default selected) -->
+                <input type="radio" name="tab" id="home" checked>
+                <!-- Inbox tab -->
+                <input type="radio" name="tab" id="inbox">
+                <!-- Contact tab -->
+                <input type="radio" name="tab" id="contact">
+                <!-- Heart tab -->
+                <input type="radio" name="tab" id="heart">
+                <!-- About tab -->
+                <input type="radio" name="tab" id="about">
 
-                </ul>
-            </div>
+                <!-- Labels with icons and links for each tab -->
+                <label for="home" class="home">
+                    <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
+                </label>
+                <label for="inbox" class="inbox">
+                    <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
+                        target="_blank">
+                        <i class="fas fa-file-excel"></i> Sheet
+                    </a>
+                </label>
+
+
+
+
+                <label for="contact" class="contact">
+                    <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
+                </label>
+
+
+                <label for="heart" class="heart">
+                    <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                </label>
+
+
+                <label for="about" class="about">
+                    <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
+                </label>
+
+                <!-- Tab indicator for the elastic animation -->
+                <div class="tab"></div>
+
+            </nav>
         </div>
-    </nav>
+    </div>
 
     <section class="p-10 text-center">
         <h2 class="text-3xl font-bold">Case Reports</h2>
@@ -145,29 +211,114 @@
             }
         }
 
-        function displayData(data) {
-            const table = document.getElementById("reportTable");
-            table.innerHTML = "";
-            data.forEach(row => {
-                let imageUrl = row["Case Picture"];
-                table.innerHTML += `<tr class='border border-gray-700'>
-                    <td class='p-2'>${row.Timestamp}</td>
-                    <td class='p-2'>${row.Date}</td>
-                    <td class='p-2'>${row.Day}</td>
-                    <td class='p-2'>${row.Time}</td>
-                    <td class='p-2'>${row["Victim Name"]}</td>
-                    <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Click Here</a></td>
-                    <td class='p-2'>${row.Gender}</td>
-                    <td class='p-2'>${row.Religion}</td>
-                    <td class='p-2'>${row.Location}</td>
-                    <td class='p-2'>${row["Case Description"]}</td>
-                </tr>`;
-            });
-        }
+        function formatDateForDisplay(dateString) {
+    if (!dateString) return "";
 
-        function filterData() {
+    const parts = dateString.split("/");
+    if (parts.length === 3) {
+        const mm = parts[0].padStart(2, '0'); // Month
+        const dd = parts[1].padStart(2, '0'); // Day
+        const yyyy = parts[2]; // Year
+
+        return `${dd}/${mm}/${yyyy}`; // Convert to DD/MM/YYYY format
+    }
+    return dateString;
+}
+
+
+function displayData(data) {
+    const table = document.getElementById("reportTable");
+    table.innerHTML = "";
+
+    // Sort data by date (latest first)
+    data.sort((a, b) => {
+        const dateA = new Date(convertDateFormat(a["Date"]));
+        const dateB = new Date(convertDateFormat(b["Date"]));
+        return dateB - dateA; // Descending order
+    });
+
+    data.forEach(row => {
+        let imageUrl = row["Case Picture"];
+        let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
+
+        table.innerHTML += `<tr class='border border-gray-700'>
+            <td class='p-2'>${row.Timestamp}</td>
+            <td class='p-2'>${formattedDate}</td> <!-- Display formatted date -->
+            <td class='p-2'>${row.Day}</td>
+            <td class='p-2'>${row.Time}</td>
+            <td class='p-2'>${row["Victim Name"]}</td>
+            <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
+            <td class='p-2'>${row.Gender}</td>
+            <td class='p-2'>${row.Religion}</td>
+            <td class='p-2'>${row.Location}</td>
+            <td class='p-2'>${row["Case Description"]}</td>
+        </tr>`;
+    });
+}
+
+function displayLatestCase(data) {
+    const table = document.getElementById("reportTable");
+    table.innerHTML = "";
+
+    if (data.length === 0) return;
+
+    // Sort data by date (latest first)
+    data.sort((a, b) => {
+        const dateA = new Date(convertDateFormat(a["Date"]));
+        const dateB = new Date(convertDateFormat(b["Date"]));
+        return dateB - dateA; // Descending order
+    });
+
+    // Get the latest case (first entry after sorting)
+    const latestCase = data[0];
+
+    let imageUrl = latestCase["Case Picture"];
+    let formattedDate = formatDateForDisplay(latestCase["Date"]); // Convert to DD/MM/YYYY
+
+    table.innerHTML += `<tr class='border border-gray-700'>
+        <td class='p-2'>${latestCase.Timestamp}</td>
+        <td class='p-2'>${formattedDate}</td> <!-- Display formatted date -->
+        <td class='p-2'>${latestCase.Day}</td>
+        <td class='p-2'>${latestCase.Time}</td>
+        <td class='p-2'>${latestCase["Victim Name"]}</td>
+        <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
+        <td class='p-2'>${latestCase.Gender}</td>
+        <td class='p-2'>${latestCase.Religion}</td>
+        <td class='p-2'>${latestCase.Location}</td>
+        <td class='p-2'>${latestCase["Case Description"]}</td>
+    </tr>`;
+}
+
+
+
+        function convertDateFormat(dateString) {
+    // Check if the date string is valid
+    if (!dateString) return "";
+
+    const parts = dateString.split("/");
+    if (parts.length === 3) {
+        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert MM/DD/YYYY to YYYY-MM-DD
+    }
+    return dateString;
+}
+
+function convertDateFormat(dateString) {
+    if (!dateString) return "";
+
+    const parts = dateString.split("/"); // Assuming MM/DD/YYYY format
+    if (parts.length === 3) {
+        const mm = parts[0].padStart(2, '0'); // Ensure two-digit month
+        const dd = parts[1].padStart(2, '0'); // Ensure two-digit day
+        const yyyy = parts[2];
+
+        return `${yyyy}-${mm}-${dd}`; // Convert to YYYY-MM-DD
+    }
+    return dateString; // Return unchanged if format is incorrect
+}
+
+function filterData() {
     const crimeType = document.getElementById("crimeType").value;
-    const dateFilter = document.getElementById("dateFilter").value;
+    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
     const genderFilter = document.getElementById("genderFilter").value;
     const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
 
@@ -175,8 +326,10 @@
         let rowCrimeType = row["Crime Type"];
         if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
 
+        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
+
         let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-        let matchesDate = dateFilter === "" || row["Date"] === dateFilter;
+        let matchesDate = dateFilter === "" || rowDate === dateFilter;
         let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
         let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
 
@@ -185,6 +338,8 @@
 
     displayData(filteredData);
 }
+
+
 
 
 
@@ -209,6 +364,7 @@
 
         fetchData();
     </script>
+    <script src="nav-script.js"></script>
 </body>
 
 </html>
