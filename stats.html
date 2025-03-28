@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
     <style>
@@ -16,100 +17,143 @@
             color: white;
             font-family: 'Inter', sans-serif;
         }
+
         .card {
             background: linear-gradient(135deg, #1e40af, #9333ea);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             border-radius: 15px;
         }
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
         }
+
         .chart-container {
             width: 100%;
             max-width: 800px;
             height: 400px;
             margin: auto;
         }
-       body {
-    background: url("Background.jpg") no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-}
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(20, 30, 48, 0.8); /* Dark overlay to improve text readability */
-    z-index: -1;
-}
+        body {
+            background: url("Adobe Express - file (1) (1).png") no-repeat center center fixed;
+            /* background-size: cover; */
+            color: white;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
 
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: rgba(20, 30, 48, 0.8); */
+            /* Dark overlay to improve text readability */
+            z-index: -1;
+        }
+        .costum{
+            display: flex;
+            justify-content: left;
+            text-align: left;
+            color: rgb(44, 47, 212);
+            
+        }
+        .border-2{
+            border: 2px solid black;
+        }
     </style>
 </head>
 <div class="m-nav">
-<div class="wrapper">
-    <!-- Navigation bar with radio buttons for tab functionality -->
-    <nav>
-       <!-- Home tab (default selected) -->
-       <input type="radio" name="tab" id="home" checked>
-       <!-- Inbox tab -->
-       <input type="radio" name="tab" id="inbox">
-       <!-- Contact tab -->
-       <input type="radio" name="tab" id="contact">
-       <!-- Heart tab -->
-       <input type="radio" name="tab" id="heart">
-       <!-- About tab -->
-       <input type="radio" name="tab" id="about">
-    
-       <!-- Labels with icons and links for each tab -->
-       <label for="home" class="home">
-        <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
-    </label>
-       <label for="inbox" class="inbox">
-        <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">
-            <i class="fas fa-file-excel"></i> Sheet
-        </a>
-    </label>
-    
-    
-     
-     
-    <label for="contact" class="contact">
-        <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
-    </label>
-    
-       
-       <label for="heart" class="heart">
-        <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-    </label>
-    
-       
-    <label for="about" class="about">
-        <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
-    </label>
-    
-       <!-- Tab indicator for the elastic animation -->
-       <div class="tab"></div>
-    
-    </nav>
- </div>
-</div>
-<body class="p-8">
-    <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-6xl font-bold text-blue-400 mb-6">📊 Case Statistics</h1>
+    <div class="wrapper">
+        <!-- Navigation bar with radio buttons for tab functionality -->
+        <nav>
+            <!-- Home tab (default selected) -->
+            <input type="radio" name="tab" id="home" checked>
+            <!-- Inbox tab -->
+            <input type="radio" name="tab" id="inbox">
+            <!-- Contact tab -->
+            <input type="radio" name="tab" id="contact">
+            <!-- Heart tab -->
+            <input type="radio" name="tab" id="heart">
+            <!-- About tab -->
+            <input type="radio" name="tab" id="about">
 
-        <div class="mt-10">
-            <h2 class="text-3xl font-semibold">Total Cases: 
-                <span id="totalCases" class="text-yellow-400 text-5xl font-bold">0</span>
-            </h2>
+            <!-- Labels with icons and links for each tab -->
+            <label for="home" class="home">
+                <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
+            </label>
+            <label for="inbox" class="inbox">
+                <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
+                    target="_blank">
+                    <i class="fas fa-file-excel"></i> Sheet
+                </a>
+            </label>
+
+
+
+
+            <label for="contact" class="contact">
+                <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
+            </label>
+
+
+            <label for="heart" class="heart">
+                <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+            </label>
+
+
+            <label for="about" class="about">
+                <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
+            </label>
+
+            <!-- Tab indicator for the elastic animation -->
+            <div class="tab"></div>
+
+        </nav>
+    </div>
+</div>
+
+<body class="p-8">
+    <div class="costum">
+        <h1 class="text-6xl font-bold  mb-6 ">📊 Case Statistics</h1></div>
+        <select id="monthFilter" class="text-black p-2 rounded border-2">
+            <option value="">All Months</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
+                class="text-black p-2 rounded w-24 border-2">
+
+            <button onclick="fetchFilteredData()" class="bg-blue-500 text-white p-2 rounded">Filter</button>
+            <div class="mt-10 ">
+                <h2 class="text-3xl font-semibold text-blue-400">Total Cases:
+                    <span id="totalCases" class="text-blue-400 text-5xl font-bold border-2">0</span>
+                </h2>
+            </div>
+    <div class="max-w-6xl mx-auto text-center">
+        
+        <div class="flex justify-center gap-4 my-6">
+            
+
+            
         </div>
+
+        
 
         <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="card p-6 text-center">
@@ -137,6 +181,10 @@ body::before {
                 <p id="childMarriageCount" class="text-5xl font-bold">0</p>
             </div>
             <div class="card p-6 text-center">
+                <h3 class="text-2xl font-semibold">Protest</h3>
+                <p id="protestCount" class="text-5xl font-bold">0</p>
+            </div>
+            <div class="card p-6 text-center">
                 <h3 class="text-2xl font-semibold">Others</h3>
                 <p id="othersCount" class="text-5xl font-bold">0</p>
             </div>
@@ -148,66 +196,131 @@ body::before {
     </div>
 
     <script>
-        async function fetchData() {
+        async function fetchFilteredData() {
             const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
             const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
-            const sheetNames = ["Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
+            const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
-            
+
+            const selectedMonth = document.getElementById("monthFilter").value;
+            const selectedYear = document.getElementById("yearFilter").value;
+
+            console.log("Selected Month:", selectedMonth, "Selected Year:", selectedYear);
+
             try {
                 const response = await fetch(url);
                 const json = await response.json();
                 const caseCounts = {};
-                
+
                 json.valueRanges.forEach((sheet, index) => {
-                    caseCounts[sheetNames[index]] = sheet.values ? sheet.values.length - 1 : 0;
+                    const cases = sheet.values ? sheet.values.slice(1) : []; // Skip headers
+
+                    const filteredCases = cases.filter(row => {
+                        if (!row[1]) {  // Change to check the correct date column (e.g., 2nd column)
+                            console.warn("Skipping row - No date found in column 2:", row);
+                            return false;
+                        }
+
+                        let caseDateStr = row[1].trim(); // Extract date from the correct column
+                        let caseDate = parseDate(caseDateStr);
+
+                        const caseYear = caseDate.getFullYear().toString();
+                        const caseMonth = (caseDate.getMonth() + 1).toString().padStart(2, '0');
+
+                        console.log(`Case Date: ${caseDateStr} → Parsed: ${caseYear}-${caseMonth}`);
+
+                        const matchesMonth = selectedMonth === "" || caseMonth === selectedMonth;
+                        const matchesYear = selectedYear === "" || caseYear === selectedYear;
+
+                        return matchesMonth && matchesYear;
+                    });
+
+                    console.log(`Filtered cases for ${sheetNames[index]}:`, filteredCases.length);
+                    caseCounts[sheetNames[index]] = filteredCases.length;
                 });
-                
-                document.getElementById("totalCases").innerText = Object.values(caseCounts).reduce((a, b) => a + b, 0);
-                document.getElementById("murderCount").innerText = caseCounts["Murder"] || 0;
-                document.getElementById("suicideCount").innerText = caseCounts["Sucide"] || 0;
-                document.getElementById("kidnapCount").innerText = caseCounts["Kidnap"] || 0;
-                document.getElementById("conversionCount").innerText = caseCounts["Force Conversion"] || 0;
-                document.getElementById("landGrabberCount").innerText = caseCounts["Land Grabber"] || 0;
-                document.getElementById("childMarriageCount").innerText = caseCounts["Child Marrige"] || 0;
-                document.getElementById("othersCount").innerText = caseCounts["Others Cases"] || 0;
-                
-                renderChart(caseCounts);
+
+                updateStats(caseCounts);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching filtered data:", error);
             }
         }
 
-        function renderChart(caseCounts) {
-            const ctx = document.getElementById('caseChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(caseCounts),
-                    datasets: [{
-                        label: 'Number of Cases',
-                        data: Object.values(caseCounts),
-                        backgroundColor: ['#ef4444', '#facc15', '#22c55e', '#a855f7', '#ff7f50', '#008080', '#4b0082'],
-                        borderColor: '#ffffff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { color: 'white' } },
-                        tooltip: { enabled: true }
-                    }
+        // Robust Date Parsing Function
+        function parseDate(dateString) {
+            // Try direct conversion
+            let date = new Date(dateString);
+            if (!isNaN(date.getTime())) return date;
+
+            // Try manually parsing common formats
+            const parts = dateString.split(/[\/-]/); // Split on "/" or "-"
+            if (parts.length === 3) {
+                let [year, month, day] = parts;
+
+                // If year is 4 digits, assume YYYY-MM-DD format
+                if (year.length === 4) {
+                    return new Date(year, month - 1, day);
                 }
-            });
+                // Otherwise, assume MM/DD/YYYY format
+                else {
+                    return new Date(parts[2], parts[0] - 1, parts[1]);
+                }
+            }
+
+            return null; // Return null if parsing fails
         }
 
-        fetchData();
+        function updateStats(caseCounts) {
+            document.getElementById("totalCases").innerText = Object.values(caseCounts).reduce((a, b) => a + b, 0);
+            document.getElementById("murderCount").innerText = caseCounts["Murder"] || 0;
+            document.getElementById("suicideCount").innerText = caseCounts["Sucide"] || 0;
+            document.getElementById("kidnapCount").innerText = caseCounts["Kidnap"] || 0;
+            document.getElementById("conversionCount").innerText = caseCounts["Force Conversion"] || 0;
+            document.getElementById("landGrabberCount").innerText = caseCounts["Land Grabber"] || 0;
+            document.getElementById("childMarriageCount").innerText = caseCounts["Child Marrige"] || 0;
+            document.getElementById("protestCount").innerText = caseCounts["Protest Cases"] || 0;
+            document.getElementById("othersCount").innerText = caseCounts["Others Cases"] || 0;
+
+            renderChart(caseCounts);
+        }
+
+        let caseChartInstance = null;
+        function renderChart(caseCounts) {
+            if (!caseChartInstance) {
+                caseChartInstance = new Chart(document.getElementById("caseChart").getContext("2d"), {
+                    type: "doughnut",
+                    data: {
+                        labels: Object.keys(caseCounts),
+                        datasets: [{
+                            label: "Number of Cases",
+                            data: Object.values(caseCounts),
+                            backgroundColor: ["#ef4444", "#facc15", "#22c55e", "#a855f7", "#ff7f50", "#008080", "#4b0082"],
+                            borderColor: "#ffffff",
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: "bottom", labels: { color: "white" } },
+                            tooltip: { enabled: true }
+                        }
+                    }
+                });
+            } else {
+                caseChartInstance.data.labels = Object.keys(caseCounts);
+                caseChartInstance.data.datasets[0].data = Object.values(caseCounts);
+                caseChartInstance.update();
+            }
+        }
+
+        fetchFilteredData(); // Load default stats on page load
     </script>
-   <script src="nav-script.js"></script>
-    
-    
-        
+
+    <script src="nav-script.js"></script>
+
+
+
 </body>
+
 </html>

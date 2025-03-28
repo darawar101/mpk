@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
+
     <style>
         @media (max-width: 640px) {
             .filter-container {
@@ -78,7 +84,12 @@
     min-width: 120px; /* Adjust width as needed */
     text-align: center; /* Center align for better readability */
 }
-
+.dc-t{
+    font-family: "Lateef", serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 25px;
+}
     </style>
 </head>
 
@@ -144,25 +155,52 @@
                 <option value="Murder">Murder</option>
                 <option value="Child Marriage">Child Marriage</option>
                 <option value="Land Grabber">Land Grabber</option>
+                <option value="Protest Cases">Protest Cases</option>
                 <option value="Others">Others</option>
             </select>
             <input type="date" id="dateFilter" class="text-black p-2 rounded w-full sm:w-auto">
-            <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                <option value="">All Genders</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+            <select id="monthFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                <option value="">All Months</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
             </select>
+           
+            
+            <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100" class="text-black p-2 rounded w-full sm:w-auto">
+            
             <input type="text" id="nameFilter" placeholder="Search by Name"
                 class="text-black p-2 rounded w-full sm:w-auto" />
+                <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                    <option value="">All Genders</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                
             <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">Filter</button>
-            <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button>
+            <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
+            <button onclick="toggleFontSize()" class="bg-yellow-500 p-2 rounded">Text Size Big</button>
+            <button onclick="downloadTableAsPDF()" class="bg-red-500 p-2 rounded">Download PDF</button>
+<button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
+
+
         </div>
 
         <div class="table-container overflow-auto mt-6">
             <table class="w-full text-left border border-gray-700">
                 <thead>
                     <tr class="bg-gray-700">
+                        <th class="p-2">S.No</th> <!-- Serial Number Column -->
                         <th class="p-2">Timestamp</th>
                         <th class="p-2">Date</th>
                         <th class="p-2">Day</th>
@@ -172,9 +210,10 @@
                         <th class="p-2">Gender</th>
                         <th class="p-2">Religion</th>
                         <th class="p-2">Location</th>
-                        <th class="p-2">Case Description</th>
+                        <th class="p-2 ">Case Description</th>
                     </tr>
                 </thead>
+                
                 <tbody id="reportTable"></tbody>
             </table>
         </div>
@@ -185,7 +224,7 @@
         async function fetchData() {
             const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
             const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
-            const sheetNames = ["Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
+            const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
             try {
                 const response = await fetch(url);
@@ -237,13 +276,14 @@ function displayData(data) {
         return dateB - dateA; // Descending order
     });
 
-    data.forEach(row => {
+    data.forEach((row, index) => {
         let imageUrl = row["Case Picture"];
         let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
 
         table.innerHTML += `<tr class='border border-gray-700'>
+            <td class='p-2'>${index + 1}</td> <!-- Serial Number -->
             <td class='p-2'>${row.Timestamp}</td>
-            <td class='p-2'>${formattedDate}</td> <!-- Display formatted date -->
+            <td class='p-2'>${formattedDate}</td>
             <td class='p-2'>${row.Day}</td>
             <td class='p-2'>${row.Time}</td>
             <td class='p-2'>${row["Victim Name"]}</td>
@@ -251,10 +291,11 @@ function displayData(data) {
             <td class='p-2'>${row.Gender}</td>
             <td class='p-2'>${row.Religion}</td>
             <td class='p-2'>${row.Location}</td>
-            <td class='p-2'>${row["Case Description"]}</td>
+            <td class='p-2 dc-t'>${row["Case Description"]}</td>
         </tr>`;
     });
 }
+
 
 function displayLatestCase(data) {
     const table = document.getElementById("reportTable");
@@ -339,27 +380,155 @@ function filterData() {
     displayData(filteredData);
 }
 
+function filterData() {
+    const crimeType = document.getElementById("crimeType").value;
+    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
+    const genderFilter = document.getElementById("genderFilter").value;
+    const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
+    const monthFilter = document.getElementById("monthFilter").value;
+    const yearFilter = document.getElementById("yearFilter").value;
+
+    let filteredData = allData.filter(row => {
+        let rowCrimeType = row["Crime Type"];
+        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
+
+        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
+        let rowYear = rowDate.split("-")[0]; // Extract year
+        let rowMonth = rowDate.split("-")[1]; // Extract month
+
+        let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
+        let matchesDate = dateFilter === "" || rowDate === dateFilter;
+        let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
+        let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
+        let matchesMonth = monthFilter === "" || rowMonth === monthFilter;
+        let matchesYear = yearFilter === "" || rowYear === yearFilter;
+
+        return matchesCrime && matchesDate && matchesGender && matchesName && matchesMonth && matchesYear;
+    });
+
+    displayData(filteredData);
+}
 
 
 
 
 
-        function downloadCSV() {
-            let csvContent = "data:text/csv;charset=utf-8,"
-                + "Timestamp,Date,Day,Time,Victim Name,Case Picture,Gender,Religion,Location,Case Description\n";
+       
+        function toggleFontSize() {
+    let descriptions = document.querySelectorAll("td:nth-child(11)"); // Adjust column number if needed
+    descriptions.forEach(td => {
+        let currentSize = window.getComputedStyle(td).fontSize;
+        td.style.fontSize = (currentSize === "25px") ? "40px" : "25px";
+    });
+}
+function downloadTableAsPDF() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4"); // Portrait mode
 
-            allData.forEach(row => {
-                csvContent += `${row.Timestamp},${row.Date},${row.Day},${row.Time},${row["Victim Name"]},${row["Case Picture"]},${row.Gender},${row.Religion},${row.Location},${row["Case Description"]}\n`;
+    const table = document.querySelector(".table-container");
+
+    // Store original styles
+    const originalBackground = table.style.background;
+    const originalColor = table.style.color;
+    const cells = document.querySelectorAll(".table-container th, .table-container td");
+
+    // Apply white background and black text for capturing
+    table.style.background = "white";
+    table.style.color = "black";
+    cells.forEach(cell => {
+        cell.style.background = "white";
+        cell.style.color = "black";
+        cell.style.border = "2px solid black"; // Ensure borders are visible
+    });
+
+    html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 297; // A4 height in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale image
+
+        let y = 20; // Initial Y position (space for header)
+        let heightLeft = imgHeight;
+
+        // Load the watermark (logo)
+        const logo = new Image();
+        logo.src = "Adobe Express - file (1) (1).png"; // Replace with your actual logo URL or path
+
+        logo.onload = function () {
+            const logoWidth = 100; // Adjust size for visibility
+            const logoHeight = 100;
+            const logoX = (imgWidth - logoWidth) / 2; // Center horizontally
+            const logoY = (pageHeight - logoHeight) / 2; // Center vertically
+
+            while (heightLeft > 0) {
+                // Add header text
+                pdf.setFont("helvetica", "bold");
+                pdf.setFontSize(16); // Adjust font size as needed
+                pdf.text("Pakistan Darawar Itehad ®", imgWidth / 2, 10, { align: "center" });
+
+                // Add table image
+                pdf.addImage(imgData, "PNG", 0, y, imgWidth, imgHeight);
+
+                // Apply opacity before adding the watermark
+                pdf.setGState(pdf.GState({ opacity: 0.2 })); // Ensure consistency across pages
+                pdf.addImage(logo, "PNG", logoX, logoY, logoWidth, logoHeight);
+                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset to normal for next elements
+
+                heightLeft -= pageHeight;
+
+                if (heightLeft > 0) {
+                    pdf.addPage();
+                    y = 20; // Reset Y for next page
+                }
+            }
+
+            pdf.save("case_reports.pdf");
+
+            // Restore original styles
+            table.style.background = originalBackground;
+            table.style.color = originalColor;
+            cells.forEach(cell => {
+                cell.style.background = "";
+                cell.style.color = "";
+                cell.style.border = "";
             });
+        };
+    });
+}
 
-            let encodedUri = encodeURI(csvContent);
-            let link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "case_reports.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+function downloadTableAsJPEG() {
+    const table = document.querySelector(".table-container");
+
+    // Store original styles
+    const originalBackground = table.style.background;
+    const originalColor = table.style.color;
+    const cells = document.querySelectorAll(".table-container th, .table-container td");
+
+    // Apply white background and black text for capturing
+    table.style.background = "white";
+    table.style.color = "black";
+    cells.forEach(cell => {
+        cell.style.background = "white";
+        cell.style.color = "black";
+        cell.style.border = "1px solid black"; // Ensure borders are visible
+    });
+
+    html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        link.download = "case_reports.jpg";
+        link.click();
+
+        // Restore original styles
+        table.style.background = originalBackground;
+        table.style.color = originalColor;
+        cells.forEach(cell => {
+            cell.style.background = "";
+            cell.style.color = "";
+            cell.style.border = "";
+        });
+    });
+}
 
 
         fetchData();
