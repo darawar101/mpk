@@ -201,7 +201,8 @@
             <button onclick="downloadTableAsPDF()" class="bg-red-500 p-2 rounded">Download PDF</button>
             <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
 
-
+            
+            
         </div>
 
         <div class="table-container overflow-auto mt-6">
@@ -430,7 +431,7 @@
             });
         }
         function downloadTableAsPDF() {
-            
+            toggleFontSize()
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF("p", "mm", "a4"); // A4 Portrait
 
