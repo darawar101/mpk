@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap"
+        rel="stylesheet">
 
     <style>
         @media (max-width: 640px) {
@@ -80,16 +82,21 @@
             background: rgba(70, 70, 70, 0.9);
             /* Highlight row on hover */
         }
-        td:nth-child(2), th:nth-child(2) { 
-    min-width: 120px; /* Adjust width as needed */
-    text-align: center; /* Center align for better readability */
-}
-.dc-t{
-    font-family: "Lateef", serif;
-  font-weight: 200;
-  font-style: normal;
-  font-size: 25px;
-}
+
+        td:nth-child(2),
+        th:nth-child(2) {
+            min-width: 120px;
+            /* Adjust width as needed */
+            text-align: center;
+            /* Center align for better readability */
+        }
+
+        .dc-t {
+            font-family: "Lateef", serif;
+            font-weight: 200;
+            font-style: normal;
+            font-size: 25px;
+        }
     </style>
 </head>
 
@@ -174,24 +181,25 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-           
-            
-            <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100" class="text-black p-2 rounded w-full sm:w-auto">
-            
+
+
+            <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
+                class="text-black p-2 rounded w-full sm:w-auto">
+
             <input type="text" id="nameFilter" placeholder="Search by Name"
                 class="text-black p-2 rounded w-full sm:w-auto" />
-                <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                    <option value="">All Genders</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-                
+            <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                <option value="">All Genders</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
             <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">Filter</button>
             <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
             <button onclick="toggleFontSize()" class="bg-yellow-500 p-2 rounded">Text Size Big</button>
             <button onclick="downloadTableAsPDF()" class="bg-red-500 p-2 rounded">Download PDF</button>
-<button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
+            <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
 
 
         </div>
@@ -213,7 +221,7 @@
                         <th class="p-2 ">Case Description</th>
                     </tr>
                 </thead>
-                
+
                 <tbody id="reportTable"></tbody>
             </table>
         </div>
@@ -251,36 +259,36 @@
         }
 
         function formatDateForDisplay(dateString) {
-    if (!dateString) return "";
+            if (!dateString) return "";
 
-    const parts = dateString.split("/");
-    if (parts.length === 3) {
-        const mm = parts[0].padStart(2, '0'); // Month
-        const dd = parts[1].padStart(2, '0'); // Day
-        const yyyy = parts[2]; // Year
+            const parts = dateString.split("/");
+            if (parts.length === 3) {
+                const mm = parts[0].padStart(2, '0'); // Month
+                const dd = parts[1].padStart(2, '0'); // Day
+                const yyyy = parts[2]; // Year
 
-        return `${dd}/${mm}/${yyyy}`; // Convert to DD/MM/YYYY format
-    }
-    return dateString;
-}
+                return `${dd}/${mm}/${yyyy}`; // Convert to DD/MM/YYYY format
+            }
+            return dateString;
+        }
 
 
-function displayData(data) {
-    const table = document.getElementById("reportTable");
-    table.innerHTML = "";
+        function displayData(data) {
+            const table = document.getElementById("reportTable");
+            table.innerHTML = "";
 
-    // Sort data by date (latest first)
-    data.sort((a, b) => {
-        const dateA = new Date(convertDateFormat(a["Date"]));
-        const dateB = new Date(convertDateFormat(b["Date"]));
-        return dateB - dateA; // Descending order
-    });
+            // Sort data by date (latest first)
+            data.sort((a, b) => {
+                const dateA = new Date(convertDateFormat(a["Date"]));
+                const dateB = new Date(convertDateFormat(b["Date"]));
+                return dateB - dateA; // Descending order
+            });
 
-    data.forEach((row, index) => {
-        let imageUrl = row["Case Picture"];
-        let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
+            data.forEach((row, index) => {
+                let imageUrl = row["Case Picture"];
+                let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
 
-        table.innerHTML += `<tr class='border border-gray-700'>
+                table.innerHTML += `<tr class='border border-gray-700'>
             <td class='p-2'>${index + 1}</td> <!-- Serial Number -->
             <td class='p-2'>${row.Timestamp}</td>
             <td class='p-2'>${formattedDate}</td>
@@ -293,30 +301,30 @@ function displayData(data) {
             <td class='p-2'>${row.Location}</td>
             <td class='p-2 dc-t'>${row["Case Description"]}</td>
         </tr>`;
-    });
-}
+            });
+        }
 
 
-function displayLatestCase(data) {
-    const table = document.getElementById("reportTable");
-    table.innerHTML = "";
+        function displayLatestCase(data) {
+            const table = document.getElementById("reportTable");
+            table.innerHTML = "";
 
-    if (data.length === 0) return;
+            if (data.length === 0) return;
 
-    // Sort data by date (latest first)
-    data.sort((a, b) => {
-        const dateA = new Date(convertDateFormat(a["Date"]));
-        const dateB = new Date(convertDateFormat(b["Date"]));
-        return dateB - dateA; // Descending order
-    });
+            // Sort data by date (latest first)
+            data.sort((a, b) => {
+                const dateA = new Date(convertDateFormat(a["Date"]));
+                const dateB = new Date(convertDateFormat(b["Date"]));
+                return dateB - dateA; // Descending order
+            });
 
-    // Get the latest case (first entry after sorting)
-    const latestCase = data[0];
+            // Get the latest case (first entry after sorting)
+            const latestCase = data[0];
 
-    let imageUrl = latestCase["Case Picture"];
-    let formattedDate = formatDateForDisplay(latestCase["Date"]); // Convert to DD/MM/YYYY
+            let imageUrl = latestCase["Case Picture"];
+            let formattedDate = formatDateForDisplay(latestCase["Date"]); // Convert to DD/MM/YYYY
 
-    table.innerHTML += `<tr class='border border-gray-700'>
+            table.innerHTML += `<tr class='border border-gray-700'>
         <td class='p-2'>${latestCase.Timestamp}</td>
         <td class='p-2'>${formattedDate}</td> <!-- Display formatted date -->
         <td class='p-2'>${latestCase.Day}</td>
@@ -328,207 +336,240 @@ function displayLatestCase(data) {
         <td class='p-2'>${latestCase.Location}</td>
         <td class='p-2'>${latestCase["Case Description"]}</td>
     </tr>`;
-}
+        }
 
 
 
         function convertDateFormat(dateString) {
-    // Check if the date string is valid
-    if (!dateString) return "";
+            // Check if the date string is valid
+            if (!dateString) return "";
 
-    const parts = dateString.split("/");
-    if (parts.length === 3) {
-        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert MM/DD/YYYY to YYYY-MM-DD
-    }
-    return dateString;
-}
-
-function convertDateFormat(dateString) {
-    if (!dateString) return "";
-
-    const parts = dateString.split("/"); // Assuming MM/DD/YYYY format
-    if (parts.length === 3) {
-        const mm = parts[0].padStart(2, '0'); // Ensure two-digit month
-        const dd = parts[1].padStart(2, '0'); // Ensure two-digit day
-        const yyyy = parts[2];
-
-        return `${yyyy}-${mm}-${dd}`; // Convert to YYYY-MM-DD
-    }
-    return dateString; // Return unchanged if format is incorrect
-}
-
-function filterData() {
-    const crimeType = document.getElementById("crimeType").value;
-    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
-    const genderFilter = document.getElementById("genderFilter").value;
-    const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
-
-    let filteredData = allData.filter(row => {
-        let rowCrimeType = row["Crime Type"];
-        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
-
-        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-
-        let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-        let matchesDate = dateFilter === "" || rowDate === dateFilter;
-        let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
-        let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
-
-        return matchesCrime && matchesDate && matchesGender && matchesName;
-    });
-
-    displayData(filteredData);
-}
-
-function filterData() {
-    const crimeType = document.getElementById("crimeType").value;
-    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
-    const genderFilter = document.getElementById("genderFilter").value;
-    const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
-    const monthFilter = document.getElementById("monthFilter").value;
-    const yearFilter = document.getElementById("yearFilter").value;
-
-    let filteredData = allData.filter(row => {
-        let rowCrimeType = row["Crime Type"];
-        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
-
-        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-        let rowYear = rowDate.split("-")[0]; // Extract year
-        let rowMonth = rowDate.split("-")[1]; // Extract month
-
-        let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-        let matchesDate = dateFilter === "" || rowDate === dateFilter;
-        let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
-        let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
-        let matchesMonth = monthFilter === "" || rowMonth === monthFilter;
-        let matchesYear = yearFilter === "" || rowYear === yearFilter;
-
-        return matchesCrime && matchesDate && matchesGender && matchesName && matchesMonth && matchesYear;
-    });
-
-    displayData(filteredData);
-}
-
-
-
-
-
-       
-        function toggleFontSize() {
-    let descriptions = document.querySelectorAll("td:nth-child(11)"); // Adjust column number if needed
-    descriptions.forEach(td => {
-        let currentSize = window.getComputedStyle(td).fontSize;
-        td.style.fontSize = (currentSize === "25px") ? "40px" : "25px";
-    });
-}
-function downloadTableAsPDF() {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "mm", "a4"); // Portrait mode
-
-    const table = document.querySelector(".table-container");
-
-    // Store original styles
-    const originalBackground = table.style.background;
-    const originalColor = table.style.color;
-    const cells = document.querySelectorAll(".table-container th, .table-container td");
-
-    // Apply white background and black text for capturing
-    table.style.background = "white";
-    table.style.color = "black";
-    cells.forEach(cell => {
-        cell.style.background = "white";
-        cell.style.color = "black";
-        cell.style.border = "2px solid black"; // Ensure borders are visible
-    });
-
-    html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 210; // A4 width in mm
-        const pageHeight = 297; // A4 height in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale image
-
-        let y = 20; // Initial Y position (space for header)
-        let heightLeft = imgHeight;
-
-        // Load the watermark (logo)
-        const logo = new Image();
-        logo.src = "Adobe Express - file (1) (1).png"; // Replace with your actual logo URL or path
-
-        logo.onload = function () {
-            const logoWidth = 100; // Adjust size for visibility
-            const logoHeight = 100;
-            const logoX = (imgWidth - logoWidth) / 2; // Center horizontally
-            const logoY = (pageHeight - logoHeight) / 2; // Center vertically
-
-            while (heightLeft > 0) {
-                // Add header text
-                pdf.setFont("helvetica", "bold");
-                pdf.setFontSize(16); // Adjust font size as needed
-                pdf.text("Pakistan Darawar Itehad ®", imgWidth / 2, 10, { align: "center" });
-
-                // Add table image
-                pdf.addImage(imgData, "PNG", 0, y, imgWidth, imgHeight);
-
-                // Apply opacity before adding the watermark
-                pdf.setGState(pdf.GState({ opacity: 0.2 })); // Ensure consistency across pages
-                pdf.addImage(logo, "PNG", logoX, logoY, logoWidth, logoHeight);
-                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset to normal for next elements
-
-                heightLeft -= pageHeight;
-
-                if (heightLeft > 0) {
-                    pdf.addPage();
-                    y = 20; // Reset Y for next page
-                }
+            const parts = dateString.split("/");
+            if (parts.length === 3) {
+                return `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert MM/DD/YYYY to YYYY-MM-DD
             }
+            return dateString;
+        }
 
-            pdf.save("case_reports.pdf");
+        function convertDateFormat(dateString) {
+            if (!dateString) return "";
 
-            // Restore original styles
-            table.style.background = originalBackground;
-            table.style.color = originalColor;
-            cells.forEach(cell => {
-                cell.style.background = "";
-                cell.style.color = "";
-                cell.style.border = "";
+            const parts = dateString.split("/"); // Assuming MM/DD/YYYY format
+            if (parts.length === 3) {
+                const mm = parts[0].padStart(2, '0'); // Ensure two-digit month
+                const dd = parts[1].padStart(2, '0'); // Ensure two-digit day
+                const yyyy = parts[2];
+
+                return `${yyyy}-${mm}-${dd}`; // Convert to YYYY-MM-DD
+            }
+            return dateString; // Return unchanged if format is incorrect
+        }
+
+        function filterData() {
+            const crimeType = document.getElementById("crimeType").value;
+            const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
+            const genderFilter = document.getElementById("genderFilter").value;
+            const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
+
+            let filteredData = allData.filter(row => {
+                let rowCrimeType = row["Crime Type"];
+                if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
+
+                let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
+
+                let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
+                let matchesDate = dateFilter === "" || rowDate === dateFilter;
+                let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
+                let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
+
+                return matchesCrime && matchesDate && matchesGender && matchesName;
             });
-        };
-    });
-}
 
-function downloadTableAsJPEG() {
-    const table = document.querySelector(".table-container");
+            displayData(filteredData);
+        }
 
-    // Store original styles
-    const originalBackground = table.style.background;
-    const originalColor = table.style.color;
-    const cells = document.querySelectorAll(".table-container th, .table-container td");
+        function filterData() {
+            const crimeType = document.getElementById("crimeType").value;
+            const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
+            const genderFilter = document.getElementById("genderFilter").value;
+            const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
+            const monthFilter = document.getElementById("monthFilter").value;
+            const yearFilter = document.getElementById("yearFilter").value;
 
-    // Apply white background and black text for capturing
-    table.style.background = "white";
-    table.style.color = "black";
-    cells.forEach(cell => {
-        cell.style.background = "white";
-        cell.style.color = "black";
-        cell.style.border = "1px solid black"; // Ensure borders are visible
-    });
+            let filteredData = allData.filter(row => {
+                let rowCrimeType = row["Crime Type"];
+                if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
 
-    html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/jpeg", 1.0);
-        link.download = "case_reports.jpg";
-        link.click();
+                let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
+                let rowYear = rowDate.split("-")[0]; // Extract year
+                let rowMonth = rowDate.split("-")[1]; // Extract month
 
-        // Restore original styles
-        table.style.background = originalBackground;
-        table.style.color = originalColor;
-        cells.forEach(cell => {
-            cell.style.background = "";
-            cell.style.color = "";
-            cell.style.border = "";
-        });
-    });
-}
+                let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
+                let matchesDate = dateFilter === "" || rowDate === dateFilter;
+                let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
+                let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
+                let matchesMonth = monthFilter === "" || rowMonth === monthFilter;
+                let matchesYear = yearFilter === "" || rowYear === yearFilter;
+
+                return matchesCrime && matchesDate && matchesGender && matchesName && matchesMonth && matchesYear;
+            });
+
+            displayData(filteredData);
+        }
+
+
+
+
+
+
+        function toggleFontSize() {
+            let descriptions = document.querySelectorAll("td:nth-child(11)"); // Adjust column number if needed
+            descriptions.forEach(td => {
+                let currentSize = window.getComputedStyle(td).fontSize;
+                td.style.fontSize = (currentSize === "25px") ? "32px" : "25px";
+            });
+        }
+        function downloadTableAsPDF() {
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF("p", "mm", "a4"); // A4 Portrait
+
+            const table = document.querySelector(".table-container");
+            const rows = Array.from(document.querySelectorAll(".table-container tbody tr"));
+            const rowsPerPage = 10; // Show 10 rows per page
+            let currentPage = 0;
+
+            // Store original styles
+            const originalDisplay = rows.map(row => row.style.display);
+            const originalBackground = table.style.background;
+            const originalColor = table.style.color;
+            const cells = document.querySelectorAll(".table-container th, .table-container td");
+
+            // Set white background and black text for clarity in PDF
+            table.style.background = "white";
+            table.style.color = "black";
+            cells.forEach(cell => {
+                cell.style.background = "white";
+                cell.style.color = "black";
+                cell.style.border = "1px solid black"; // Ensure borders are visible
+            });
+
+            // Load watermark image first
+            const watermark = new Image();
+            watermark.src = "Adobe Express - file (1) (1).png"; // Ensure correct path
+
+            watermark.onload = function () {
+
+                function captureAndAddToPDF(callback) {
+                    setTimeout(() => {
+                        requestAnimationFrame(() => {
+                            html2canvas(table, { scale: 1.0, backgroundColor: "#ffffff" }).then(canvas => {
+                                const imgData = canvas.toDataURL("image/jpeg", 0.6); // Convert to compressed JPEG (Quality 60%)
+
+                                // Adjust image size to prevent "Invalid string length" error
+                                const imgWidth = 210; // A4 width in mm
+                                const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+                                const maxHeight = 260; // Max height to prevent overflow
+
+                                let finalHeight = Math.min(imgHeight, maxHeight); // Prevent large images
+
+                                let y = 10; // Starting position
+
+                                if (currentPage > 0) pdf.addPage(); // New page after first
+
+                                pdf.setFont("helvetica", "bold");
+                                pdf.setFontSize(14);
+                                pdf.text("Pakistan Darawar Itehad ®", imgWidth / 2, y, { align: "center" });
+
+                                y += 10; // Move down after title
+                                pdf.addImage(imgData, "JPEG", 0, y, imgWidth, finalHeight); // Add table image
+
+                                // Add watermark with reduced size & opacity
+                                // Calculate watermark position to center it on the page
+                                const logoWidth = 80;  // Adjust size if needed
+                                const logoHeight = 80; // Adjust size if needed
+                                const logoX = (210 - logoWidth) / 2; // A4 width is 210mm, center horizontally
+                                const logoY = (297 - logoHeight) / 2; // A4 height is 297mm, center vertically
+
+                                // Add watermark
+                                pdf.setGState(pdf.GState({ opacity: 0.15 })); // Lower opacity
+                                pdf.addImage(watermark, "PNG", logoX, logoY, logoWidth, logoHeight);
+                                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset opacity
+
+
+                                pdf.setGState(pdf.GState({ opacity: 0.15 })); // Lower opacity
+                                pdf.addImage(watermark, "PNG", logoX, logoY, logoWidth, logoHeight);
+                                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset opacity
+
+                                currentPage++;
+                                callback(); // Process next set of rows
+                            }).catch(error => console.error("Error capturing canvas:", error));
+                        });
+                    }, 100);
+                }
+
+                function processRows(startIndex) {
+                    if (startIndex >= rows.length) {
+                        pdf.save("case_reports.pdf"); // Save the PDF after all rows are processed
+                        rows.forEach((row, i) => row.style.display = originalDisplay[i]); // Restore visibility
+                        table.style.background = originalBackground;
+                        table.style.color = originalColor;
+                        cells.forEach(cell => {
+                            cell.style.background = "";
+                            cell.style.color = "";
+                            cell.style.border = "";
+                        });
+                        return;
+                    }
+
+                    // Hide all rows
+                    rows.forEach(row => (row.style.display = "none"));
+
+                    // Show only 10 rows per page
+                    for (let i = startIndex; i < Math.min(startIndex + rowsPerPage, rows.length); i++) {
+                        rows[i].style.display = "";
+                    }
+
+                    captureAndAddToPDF(() => processRows(startIndex + rowsPerPage)); // Process next set
+                }
+
+                processRows(0);
+            };
+        }
+
+        function downloadTableAsJPEG() {
+            const table = document.querySelector(".table-container");
+
+            // Store original styles
+            const originalBackground = table.style.background;
+            const originalColor = table.style.color;
+            const cells = document.querySelectorAll(".table-container th, .table-container td");
+
+            // Apply white background and black text for capturing
+            table.style.background = "white";
+            table.style.color = "black";
+            cells.forEach(cell => {
+                cell.style.background = "white";
+                cell.style.color = "black";
+                cell.style.border = "1px solid black"; // Ensure borders are visible
+            });
+
+            html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/jpeg", 1.0);
+                link.download = "case_reports.jpg";
+                link.click();
+
+                // Restore original styles
+                table.style.background = originalBackground;
+                table.style.color = originalColor;
+                cells.forEach(cell => {
+                    cell.style.background = "";
+                    cell.style.color = "";
+                    cell.style.border = "";
+                });
+            });
+        }
 
 
         fetchData();
