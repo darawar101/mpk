@@ -15,6 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="nav.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap"
         rel="stylesheet">
@@ -101,55 +103,26 @@
 </head>
 
 <body class="bg-gray-900 text-white">
-    <div class="m-nav ">
-        <div class="wrapper mt-10">
-            <!-- Navigation bar with radio buttons for tab functionality -->
-            <nav>
-                <!-- Home tab (default selected) -->
-                <input type="radio" name="tab" id="home" checked>
-                <!-- Inbox tab -->
-                <input type="radio" name="tab" id="inbox">
-                <!-- Contact tab -->
-                <input type="radio" name="tab" id="contact">
-                <!-- Heart tab -->
-                <input type="radio" name="tab" id="heart">
-                <!-- About tab -->
-                <input type="radio" name="tab" id="about">
-
-                <!-- Labels with icons and links for each tab -->
-                <label for="home" class="home">
-                    <a href="index.html" id="homeLink"><i class="fas fa-home"></i>Home</a>
-                </label>
-                <label for="inbox" class="inbox">
-                    <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
-                        target="_blank">
-                        <i class="fas fa-file-excel"></i> Sheet
-                    </a>
-                </label>
-
-
-
-
-                <label for="contact" class="contact">
-                    <a href="stats.html" id="statsLink"><i class="fas fa-chart-pie"></i>Stats</a>
-                </label>
-
-
-                <label for="heart" class="heart">
-                    <a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                </label>
-
-
-                <label for="about" class="about">
-                    <a href="user-guide.html" id="userGuideLink"><i class="fa fa-book"></i>User Guide</a>
-                </label>
-
-                <!-- Tab indicator for the elastic animation -->
-                <div class="tab"></div>
-
-            </nav>
-        </div>
-    </div>
+   <!-- Navbar -->
+   <nav>
+    <!-- Checkbox for toggling menu -->
+    <input type="checkbox" id="check">
+    <!-- Menu icon -->
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <!-- Site logo -->
+    <label class="logo">Darawar Itehad</label>
+    <!-- Navigation links -->
+    <ul>
+     
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">Sheet</a></li>
+      <li><a href="stats.html">Stats</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="user-guide.html">User Guide</a></li>
+    </ul>
+  </nav>
 
     <section class="p-10 text-center">
         <h2 class="text-3xl font-bold">Case Reports</h2>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="nav.css">
     <style>
         body {
             background: url("Background.jpg") no-repeat center center fixed;
@@ -54,36 +56,26 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <div class="m-nav">
-        <div class="wrapper mt-10">
-            <nav>
-                <input type="radio" name="tab" id="home">
-                <input type="radio" name="tab" id="inbox">
-                <input type="radio" name="tab" id="contact">
-                <input type="radio" name="tab" id="heart">
-                <input type="radio" name="tab" id="about" checked>
-            
-                <label for="home" class="home">
-                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                </label>
-                <label for="inbox" class="inbox">
-                    <a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">
-                        <i class="fas fa-file-excel"></i> Sheet
-                    </a>
-                </label>
-                <label for="contact" class="contact">
-                    <a href="stats.html"><i class="fas fa-chart-pie"></i> Stats</a>
-                </label>
-                <label for="heart" class="heart">
-                    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                </label>
-                <label for="about" class="about">
-                    <a href="user-guide.html"><i class="fa fa-book"></i> User Guide</a>
-                </label>
-                <div class="tab"></div>
-            </nav>
-        </div>
-    </div>
+   <!-- Navbar -->
+   <nav>
+    <!-- Checkbox for toggling menu -->
+    <input type="checkbox" id="check">
+    <!-- Menu icon -->
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <!-- Site logo -->
+    <label class="logo">Darawar Itehad</label>
+    <!-- Navigation links -->
+    <ul>
+     
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">Sheet</a></li>
+      <li><a href="stats.html">Stats</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="user-guide.html">User Guide</a></li>
+    </ul>
+  </nav>
 
     <!-- User Guide Content -->
     <div class="container text-center">
