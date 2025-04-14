@@ -404,13 +404,13 @@
             });
         }
         function downloadTableAsPDF() {
-            toggleFontSize()
+           
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF("p", "mm", "a4"); // A4 Portrait
 
             const table = document.querySelector(".table-container");
             const rows = Array.from(document.querySelectorAll(".table-container tbody tr"));
-            const rowsPerPage = 10; // Show 10 rows per page
+            const rowsPerPage = 8; // Show 10 rows per page
             let currentPage = 0;
 
             // Store original styles
