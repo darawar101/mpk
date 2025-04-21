@@ -20,7 +20,21 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap"
         rel="stylesheet">
-
+        <style>
+            .loader-spinner {
+              border: 5px solid #f3f3f3;
+              border-top: 5px solid #3498db;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            </style>
+            
     <style>
         @media (max-width: 640px) {
             .filter-container {
@@ -103,26 +117,27 @@
 </head>
 
 <body class="bg-gray-900 text-white">
-   <!-- Navbar -->
-   <nav>
-    <!-- Checkbox for toggling menu -->
-    <input type="checkbox" id="check">
-    <!-- Menu icon -->
-    <label for="check" class="checkbtn">
-      <i class="fas fa-bars"></i>
-    </label>
-    <!-- Site logo -->
-    <label class="logo">Darawar Itehad</label>
-    <!-- Navigation links -->
-    <ul>
-     
-      <li><a href="index.html">Home</a></li>
-      <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing" target="_blank">Sheet</a></li>
-      <li><a href="stats.html">Stats</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="user-guide.html">User Guide</a></li>
-    </ul>
-  </nav>
+    <!-- Navbar -->
+    <nav>
+        <!-- Checkbox for toggling menu -->
+        <input type="checkbox" id="check">
+        <!-- Menu icon -->
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <!-- Site logo -->
+        <label class="logo">Darawar Itehad</label>
+        <!-- Navigation links -->
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
+                    target="_blank">Sheet</a></li>
+            <li><a href="stats.html">Stats</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="user-guide.html">User Guide</a></li>
+        </ul>
+    </nav>
 
     <section class="p-10 text-center">
         <h2 class="text-3xl font-bold">Case Reports</h2>
@@ -167,15 +182,28 @@
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
-
-            <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">Filter</button>
+  
+            <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">SEARCH</button>
             <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
-            <button onclick="toggleFontSize()" class="bg-yellow-500 p-2 rounded">Text Size Big</button>
-            <button onclick="downloadTableAsPDF()" class="bg-red-500 p-2 rounded">Download PDF</button>
+            <!-- Trigger Button -->
+            <button onclick="openLanguageModal()" class="bg-blue-500 p-2 rounded">Download PDF</button>
+
+            <!-- Modal -->
+            <div id="languageModal"
+                class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+                <div class="bg-white p-6 rounded shadow-lg text-center space-y-4">
+                    <h2 class="text-xl font-bold">Select PDF Language</h2>
+                    <button onclick="downloadSelectedPDF('urdu')" class="bg-yellow-500 p-2 rounded w-full">Urdu</button>
+                    <button onclick="downloadSelectedPDF('english')"
+                        class="bg-red-500 p-2 rounded w-full">English</button>
+                    <button onclick="closeLanguageModal()" class="text-gray-500 underline mt-2">Cancel</button>
+                </div>
+            </div>
+
             <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
 
-            
-            
+
+
         </div>
 
         <div class="table-container overflow-auto mt-6">
@@ -195,359 +223,16 @@
                         <th class="p-2 ">Case Description</th>
                     </tr>
                 </thead>
-
+             
+            
                 <tbody id="reportTable"></tbody>
             </table>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/NotoNastaliqUrdu-Regular.js"></script>
 
-    <script>
-        let allData = [];
-        async function fetchData() {
-            const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
-            const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
-            const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
-            try {
-                const response = await fetch(url);
-                const json = await response.json();
-                allData = [];
-                json.valueRanges.forEach((sheet, index) => {
-                    if (sheet.values) {
-                        const headers = sheet.values[0].map(header => header.trim());
-                        const rows = sheet.values.slice(1);
-                        rows.forEach(row => {
-                            let rowData = {};
-                            headers.forEach((header, i) => {
-                                rowData[header] = row[i] ? row[i].trim() : "";
-                            });
-                            rowData["Crime Type"] = sheetNames[index];
-                            allData.push(rowData);
-                        });
-                    }
-                });
-                displayData(allData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-
-        function formatDateForDisplay(dateString) {
-            if (!dateString) return "";
-
-            const parts = dateString.split("/");
-            if (parts.length === 3) {
-                const mm = parts[0].padStart(2, '0'); // Month
-                const dd = parts[1].padStart(2, '0'); // Day
-                const yyyy = parts[2]; // Year
-
-                return `${dd}/${mm}/${yyyy}`; // Convert to DD/MM/YYYY format
-            }
-            return dateString;
-        }
-
-
-        function displayData(data) {
-            const table = document.getElementById("reportTable");
-            table.innerHTML = "";
-
-            // Sort data by date (latest first)
-            data.sort((a, b) => {
-                const dateA = new Date(convertDateFormat(a["Date"]));
-                const dateB = new Date(convertDateFormat(b["Date"]));
-                return dateB - dateA; // Descending order
-            });
-
-            data.forEach((row, index) => {
-                let imageUrl = row["Case Picture"];
-                let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
-
-                table.innerHTML += `<tr class='border border-gray-700'>
-            <td class='p-2'>${index + 1}</td> <!-- Serial Number -->
-            <td class='p-2'>${row.Timestamp}</td>
-            <td class='p-2'>${formattedDate}</td>
-            <td class='p-2'>${row.Day}</td>
-            <td class='p-2'>${row.Time}</td>
-            <td class='p-2'>${row["Victim Name"]}</td>
-            <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
-            <td class='p-2'>${row.Gender}</td>
-            <td class='p-2'>${row.Religion}</td>
-            <td class='p-2'>${row.Location}</td>
-            <td class='p-2 dc-t'>${row["Case Description"]}</td>
-        </tr>`;
-            });
-        }
-
-
-        function displayLatestCase(data) {
-            const table = document.getElementById("reportTable");
-            table.innerHTML = "";
-
-            if (data.length === 0) return;
-
-            // Sort data by date (latest first)
-            data.sort((a, b) => {
-                const dateA = new Date(convertDateFormat(a["Date"]));
-                const dateB = new Date(convertDateFormat(b["Date"]));
-                return dateB - dateA; // Descending order
-            });
-
-            // Get the latest case (first entry after sorting)
-            const latestCase = data[0];
-
-            let imageUrl = latestCase["Case Picture"];
-            let formattedDate = formatDateForDisplay(latestCase["Date"]); // Convert to DD/MM/YYYY
-
-            table.innerHTML += `<tr class='border border-gray-700'>
-        <td class='p-2'>${latestCase.Timestamp}</td>
-        <td class='p-2'>${formattedDate}</td> <!-- Display formatted date -->
-        <td class='p-2'>${latestCase.Day}</td>
-        <td class='p-2'>${latestCase.Time}</td>
-        <td class='p-2'>${latestCase["Victim Name"]}</td>
-        <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
-        <td class='p-2'>${latestCase.Gender}</td>
-        <td class='p-2'>${latestCase.Religion}</td>
-        <td class='p-2'>${latestCase.Location}</td>
-        <td class='p-2'>${latestCase["Case Description"]}</td>
-    </tr>`;
-        }
-
-
-
-        function convertDateFormat(dateString) {
-            // Check if the date string is valid
-            if (!dateString) return "";
-
-            const parts = dateString.split("/");
-            if (parts.length === 3) {
-                return `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert MM/DD/YYYY to YYYY-MM-DD
-            }
-            return dateString;
-        }
-
-        function convertDateFormat(dateString) {
-            if (!dateString) return "";
-
-            const parts = dateString.split("/"); // Assuming MM/DD/YYYY format
-            if (parts.length === 3) {
-                const mm = parts[0].padStart(2, '0'); // Ensure two-digit month
-                const dd = parts[1].padStart(2, '0'); // Ensure two-digit day
-                const yyyy = parts[2];
-
-                return `${yyyy}-${mm}-${dd}`; // Convert to YYYY-MM-DD
-            }
-            return dateString; // Return unchanged if format is incorrect
-        }
-
-        function filterData() {
-            const crimeType = document.getElementById("crimeType").value;
-            const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
-            const genderFilter = document.getElementById("genderFilter").value;
-            const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
-
-            let filteredData = allData.filter(row => {
-                let rowCrimeType = row["Crime Type"];
-                if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
-
-                let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-
-                let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-                let matchesDate = dateFilter === "" || rowDate === dateFilter;
-                let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
-                let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
-
-                return matchesCrime && matchesDate && matchesGender && matchesName;
-            });
-
-            displayData(filteredData);
-        }
-
-        function filterData() {
-            const crimeType = document.getElementById("crimeType").value;
-            const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
-            const genderFilter = document.getElementById("genderFilter").value;
-            const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
-            const monthFilter = document.getElementById("monthFilter").value;
-            const yearFilter = document.getElementById("yearFilter").value;
-
-            let filteredData = allData.filter(row => {
-                let rowCrimeType = row["Crime Type"];
-                if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
-
-                let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-                let rowYear = rowDate.split("-")[0]; // Extract year
-                let rowMonth = rowDate.split("-")[1]; // Extract month
-
-                let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-                let matchesDate = dateFilter === "" || rowDate === dateFilter;
-                let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
-                let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
-                let matchesMonth = monthFilter === "" || rowMonth === monthFilter;
-                let matchesYear = yearFilter === "" || rowYear === yearFilter;
-
-                return matchesCrime && matchesDate && matchesGender && matchesName && matchesMonth && matchesYear;
-            });
-
-            displayData(filteredData);
-        }
-
-
-
-
-
-
-        function toggleFontSize() {
-            let descriptions = document.querySelectorAll("td:nth-child(11)"); // Adjust column number if needed
-            descriptions.forEach(td => {
-                let currentSize = window.getComputedStyle(td).fontSize;
-                td.style.fontSize = (currentSize === "25px") ? "32px" : "25px";
-            });
-        }
-        function downloadTableAsPDF() {
-           
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF("p", "mm", "a4"); // A4 Portrait
-
-            const table = document.querySelector(".table-container");
-            const rows = Array.from(document.querySelectorAll(".table-container tbody tr"));
-            const rowsPerPage = 8; // Show 10 rows per page
-            let currentPage = 0;
-
-            // Store original styles
-            const originalDisplay = rows.map(row => row.style.display);
-            const originalBackground = table.style.background;
-            const originalColor = table.style.color;
-            const cells = document.querySelectorAll(".table-container th, .table-container td");
-
-            // Set white background and black text for clarity in PDF
-            table.style.background = "white";
-            table.style.color = "black";
-            cells.forEach(cell => {
-                cell.style.background = "white";
-                cell.style.color = "black";
-                cell.style.border = "1px solid black"; // Ensure borders are visible
-            });
-
-            // Load watermark image first
-            const watermark = new Image();
-            watermark.src = "Adobe Express - file (1) (1).png"; // Ensure correct path
-
-            watermark.onload = function () {
-
-                function captureAndAddToPDF(callback) {
-                    setTimeout(() => {
-                        requestAnimationFrame(() => {
-                            html2canvas(table, { scale: 1.0, backgroundColor: "#ffffff" }).then(canvas => {
-                                const imgData = canvas.toDataURL("image/jpeg", 0.6); // Convert to compressed JPEG (Quality 60%)
-
-                                // Adjust image size to prevent "Invalid string length" error
-                                const imgWidth = 210; // A4 width in mm
-                                const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
-                                const maxHeight = 260; // Max height to prevent overflow
-
-                                let finalHeight = Math.min(imgHeight, maxHeight); // Prevent large images
-
-                                let y = 10; // Starting position
-
-                                if (currentPage > 0) pdf.addPage(); // New page after first
-
-                                pdf.setFont("helvetica", "bold");
-                                pdf.setFontSize(14);
-                                pdf.text("Pakistan Darawar Itehad ®", imgWidth / 2, y, { align: "center" });
-
-                                y += 10; // Move down after title
-                                pdf.addImage(imgData, "JPEG", 0, y, imgWidth, finalHeight); // Add table image
-
-                                // Add watermark with reduced size & opacity
-                                // Calculate watermark position to center it on the page
-                                const logoWidth = 80;  // Adjust size if needed
-                                const logoHeight = 80; // Adjust size if needed
-                                const logoX = (210 - logoWidth) / 2; // A4 width is 210mm, center horizontally
-                                const logoY = (297 - logoHeight) / 2; // A4 height is 297mm, center vertically
-
-                                // Add watermark
-                                pdf.setGState(pdf.GState({ opacity: 0.15 })); // Lower opacity
-                                pdf.addImage(watermark, "PNG", logoX, logoY, logoWidth, logoHeight);
-                                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset opacity
-
-
-                                pdf.setGState(pdf.GState({ opacity: 0.15 })); // Lower opacity
-                                pdf.addImage(watermark, "PNG", logoX, logoY, logoWidth, logoHeight);
-                                pdf.setGState(pdf.GState({ opacity: 1 })); // Reset opacity
-
-                                currentPage++;
-                                callback(); // Process next set of rows
-                            }).catch(error => console.error("Error capturing canvas:", error));
-                        });
-                    }, 100);
-                }
-
-                function processRows(startIndex) {
-                    if (startIndex >= rows.length) {
-                        pdf.save("case_reports.pdf"); // Save the PDF after all rows are processed
-                        rows.forEach((row, i) => row.style.display = originalDisplay[i]); // Restore visibility
-                        table.style.background = originalBackground;
-                        table.style.color = originalColor;
-                        cells.forEach(cell => {
-                            cell.style.background = "";
-                            cell.style.color = "";
-                            cell.style.border = "";
-                        });
-                        return;
-                    }
-
-                    // Hide all rows
-                    rows.forEach(row => (row.style.display = "none"));
-
-                    // Show only 10 rows per page
-                    for (let i = startIndex; i < Math.min(startIndex + rowsPerPage, rows.length); i++) {
-                        rows[i].style.display = "";
-                    }
-
-                    captureAndAddToPDF(() => processRows(startIndex + rowsPerPage)); // Process next set
-                }
-
-                processRows(0);
-            };
-        }
-
-        function downloadTableAsJPEG() {
-            const table = document.querySelector(".table-container");
-
-            // Store original styles
-            const originalBackground = table.style.background;
-            const originalColor = table.style.color;
-            const cells = document.querySelectorAll(".table-container th, .table-container td");
-
-            // Apply white background and black text for capturing
-            table.style.background = "white";
-            table.style.color = "black";
-            cells.forEach(cell => {
-                cell.style.background = "white";
-                cell.style.color = "black";
-                cell.style.border = "1px solid black"; // Ensure borders are visible
-            });
-
-            html2canvas(table, { scale: 2, backgroundColor: "#ffffff" }).then(canvas => {
-                const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/jpeg", 1.0);
-                link.download = "case_reports.jpg";
-                link.click();
-
-                // Restore original styles
-                table.style.background = originalBackground;
-                table.style.color = originalColor;
-                cells.forEach(cell => {
-                    cell.style.background = "";
-                    cell.style.color = "";
-                    cell.style.border = "";
-                });
-            });
-        }
-
-
-        fetchData();
-    </script>
+    <script src="dashboard.js"></script>
     <script src="nav-script.js"></script>
 </body>
 
