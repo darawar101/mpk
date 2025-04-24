@@ -1,3 +1,4 @@
+
 function downloadurdu() {
     toggleFontSize()
     const { jsPDF } = window.jspdf;
@@ -152,35 +153,62 @@ function formatDateForDisplay(dateString) {
 }
 
 
-function displayData(data) {
+let currentPage = 1;
+const casesPerPage = 100;
+
+function displayData(data = filteredData, page = 1) {
     const table = document.getElementById("reportTable");
     table.innerHTML = "";
 
-    // Sort data by date (latest first)
+    currentPage = page;
+
     data.sort((a, b) => {
         const dateA = new Date(convertDateFormat(a["Date"]));
         const dateB = new Date(convertDateFormat(b["Date"]));
-        return dateB - dateA; // Descending order
+        return dateB - dateA;
     });
 
-    data.forEach((row, index) => {
+    const startIndex = (page - 1) * casesPerPage;
+    const endIndex = startIndex + casesPerPage;
+    const paginatedData = data.slice(startIndex, endIndex);
+
+    paginatedData.forEach((row, index) => {
         let imageUrl = row["Case Picture"];
-        let formattedDate = formatDateForDisplay(row["Date"]); // Convert to DD/MM/YYYY
+        let formattedDate = formatDateForDisplay(row["Date"]);
 
         table.innerHTML += `<tr class='border border-gray-700'>
-    <td class='p-2'>${index + 1}</td> <!-- Serial Number -->
-    <td class='p-2'>${row.Timestamp}</td>
-    <td class='p-2'>${formattedDate}</td>
-    <td class='p-2'>${row.Day}</td>
-    <td class='p-2'>${row.Time}</td>
-    <td class='p-2'>${row["Victim Name"]}</td>
-    <td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
-    <td class='p-2'>${row.Gender}</td>
-    <td class='p-2'>${row.Religion}</td>
-    <td class='p-2'>${row.Location}</td>
-    <td class='p-2 dc-t'>${row["Case Description"]}</td>
-</tr>`;
+            <td class='p-2' translate="no">${startIndex + index + 1}</td>
+            <td class='p-2' translate="no">${row.Timestamp}</td>
+            <td class='p-2' translate="no">${formattedDate}</td>
+            <td class='p-2' translate="no">${row.Day}</td>
+            <td class='p-2' translate="no">${row.Time}</td>
+            <td class='p-2' translate="no">${row["Victim Name"]}</td>
+            <td class='p-2' translate="no"><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
+            <td class='p-2' translate="no">${row.Gender}</td>
+            <td class='p-2' translate="no">${row.Religion}</td>
+            <td class='p-2' translate="no">${row.Location}</td>
+            <td class='p-2 dc-t'>${row["Case Description"]}</td>
+        </tr>`;
     });
+
+    createPaginationControls(data.length);
+}
+
+function createPaginationControls(totalCases) {
+    const paginationContainer = document.getElementById("pagination");
+    paginationContainer.innerHTML = "";
+
+    const totalPages = Math.ceil(totalCases / casesPerPage);
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement("button");
+        button.innerText = i;
+        button.className = `px-3 py-1 m-1 border rounded ${i === currentPage ? "bg-blue-600 text-white" : "bg-gray-200"}`;
+        button.addEventListener("click", () => {
+            displayData(allData, i);
+        });
+        paginationContainer.appendChild(button);
+    }
 }
 
 
@@ -244,44 +272,23 @@ function convertDateFormat(dateString) {
     return dateString; // Return unchanged if format is incorrect
 }
 
-function filterData() {
-    const crimeType = document.getElementById("crimeType").value;
-    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
-    const genderFilter = document.getElementById("genderFilter").value;
-    const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
 
-    let filteredData = allData.filter(row => {
-        let rowCrimeType = row["Crime Type"];
-        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
-
-        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-
-        let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
-        let matchesDate = dateFilter === "" || rowDate === dateFilter;
-        let matchesGender = genderFilter === "" || row["Gender"] === genderFilter;
-        let matchesName = nameFilter === "" || (row["Victim Name"] && row["Victim Name"].toLowerCase().includes(nameFilter));
-
-        return matchesCrime && matchesDate && matchesGender && matchesName;
-    });
-
-    displayData(filteredData);
-}
 
 function filterData() {
     const crimeType = document.getElementById("crimeType").value;
-    const dateFilter = document.getElementById("dateFilter").value; // YYYY-MM-DD format
+    const dateFilter = document.getElementById("dateFilter").value;
     const genderFilter = document.getElementById("genderFilter").value;
     const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
     const monthFilter = document.getElementById("monthFilter").value;
     const yearFilter = document.getElementById("yearFilter").value;
 
-    let filteredData = allData.filter(row => {
+    filteredData = allData.filter(row => {
         let rowCrimeType = row["Crime Type"];
-        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide"; // Normalize typo
+        if (rowCrimeType === "Sucide") rowCrimeType = "Suicide";
 
-        let rowDate = convertDateFormat(row["Date"]); // Convert MM/DD/YYYY to YYYY-MM-DD
-        let rowYear = rowDate.split("-")[0]; // Extract year
-        let rowMonth = rowDate.split("-")[1]; // Extract month
+        let rowDate = convertDateFormat(row["Date"]);
+        let rowYear = rowDate.split("-")[0];
+        let rowMonth = rowDate.split("-")[1];
 
         let matchesCrime = crimeType === "" || rowCrimeType === crimeType;
         let matchesDate = dateFilter === "" || rowDate === dateFilter;
@@ -293,7 +300,7 @@ function filterData() {
         return matchesCrime && matchesDate && matchesGender && matchesName && matchesMonth && matchesYear;
     });
 
-    displayData(filteredData);
+    displayData(filteredData); // Use filteredData instead of allData
 }
 
 
@@ -434,20 +441,19 @@ fetchData();
 
 function openLanguageModal() {
     document.getElementById("languageModal").classList.remove("hidden");
-  }
-  
-  function closeLanguageModal() {
+}
+
+function closeLanguageModal() {
     document.getElementById("languageModal").classList.add("hidden");
-  }
-  
-  function downloadSelectedPDF(language) {
+}
+
+function downloadSelectedPDF(language) {
     closeLanguageModal();
     if (language === 'urdu') {
-      downloadurdu();
+        downloadurdu();
     } else if (language === 'english') {
-      downloadTableAsPDF();
+        downloadTableAsPDF();
     } else if (language === 'sindhi') {
-      downloadSindhiPDF(); // Make sure this function exists
+        downloadSindhiPDF(); // Make sure this function exists
     }
-  }
-  
+}

@@ -20,21 +20,27 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap"
         rel="stylesheet">
-        <style>
-            .loader-spinner {
-              border: 5px solid #f3f3f3;
-              border-top: 5px solid #3498db;
-              border-radius: 50%;
-              width: 50px;
-              height: 50px;
-              animation: spin 1s linear infinite;
+    <style>
+        .loader-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
+
+            100% {
+                transform: rotate(360deg);
             }
-            </style>
-            
+        }
+    </style>
+
     <style>
         @media (max-width: 640px) {
             .filter-container {
@@ -135,9 +141,12 @@
                     target="_blank">Sheet</a></li>
             <li><a href="stats.html">Stats</a></li>
             <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="attendance.html">Attendance</a></li>
             <li><a href="user-guide.html">User Guide</a></li>
         </ul>
     </nav>
+
+    
 
     <section class="p-10 text-center">
         <h2 class="text-3xl font-bold">Case Reports</h2>
@@ -182,12 +191,12 @@
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
-  
+
             <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">SEARCH</button>
             <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
             <!-- Trigger Button -->
             <button onclick="openLanguageModal()" class="bg-blue-500 p-2 rounded">Download PDF</button>
-
+                 
             <!-- Modal -->
             <div id="languageModal"
                 class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
@@ -197,6 +206,7 @@
                     <button onclick="downloadSelectedPDF('english')"
                         class="bg-red-500 p-2 rounded w-full">English</button>
                     <button onclick="closeLanguageModal()" class="text-gray-500 underline mt-2">Cancel</button>
+                    
                 </div>
             </div>
 
@@ -223,10 +233,12 @@
                         <th class="p-2 ">Case Description</th>
                     </tr>
                 </thead>
-             
-            
+                <div id="pagination" class="mt-6 flex flex-wrap justify-center gap-2"></div>
+
+
                 <tbody id="reportTable"></tbody>
             </table>
+            
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>

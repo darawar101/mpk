@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <link rel="stylesheet" href="nav.css">
+    <title>Attendance</title>
+    <style>
+        /* Full page layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+       
+        /* Iframe Container */
+        .iframe-container {
+            position: absolute;
+            top: 80px; /* Space for navbar */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check" class="hidden">
+        <label for="check" class="checkbtn text-white cursor-pointer p-4">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Darawar Itehad</label>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
+                    target="_blank">Sheet</a></li>
+            <li><a href="stats.html">Stats</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="attendance.html">Attendance</a></li>
+            <li><a href="user-guide.html">User Guide</a></li>
+        </ul>
+    </nav>
+
+    <!-- Iframe displaying Google Sheet -->
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRm73eby_2lwqVL2K42tKIGgHqcNIRa2wIA3e6XcgR9bgEb851zbnQadgxfTH0O4nnD2Lfj8t557R3H/pubhtml?widget=true&amp;headers=false"></iframe>
+   
+</body>
+</html>
