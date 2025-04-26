@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="nav-script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap"
         rel="stylesheet">
@@ -88,13 +92,13 @@
         }
 
         .table-container th {
-            background: rgba(50, 50, 50, 0.9);
+            background: #453ea271;
             /* Darker header */
             color: white;
         }
 
         .table-container td {
-            background: rgba(40, 40, 40, 0.8);
+            background: #453ea271;
             /* Slightly lighter than the header */
             color: white;
             border: 1px solid rgba(100, 100, 100, 0.5);
@@ -124,125 +128,157 @@
 
 <body class="bg-gray-900 text-white">
     <!-- Navbar -->
-    <nav>
-        <!-- Checkbox for toggling menu -->
-        <input type="checkbox" id="check">
-        <!-- Menu icon -->
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
-        <!-- Site logo -->
-        <label class="logo">Darawar Itehad</label>
-        <!-- Navigation links -->
-        <ul>
-
-            <li><a href="index.html">Home</a></li>
-            <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
-                    target="_blank">Sheet</a></li>
-            <li><a href="stats.html">Stats</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="attendance.html">Attendance</a></li>
-            <li><a href="user-guide.html">User Guide</a></li>
-        </ul>
-    </nav>
+    <div class="dashboard">
+        <div class="dashboard-nav">
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a href="#" class="brand-logo">
+                    <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
+                </a>
+            </header>
+            <nav class="dashboard-nav-list">
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="dashboard.html" class="dashboard-nav-item active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="stats.html" class="dashboard-nav-item">
+                    <i class="fas fa-chart-line"></i> Stats
+                </a>
+                <a href="attendance.html" class="dashboard-nav-item">
+                    <i class="fas fa-clipboard-check"></i> Attendance
+                </a>
+                <a href="sheet.html" class="dashboard-nav-item">
+                    <i class="fas fa-file-excel"></i> Sheet
+                </a>
+                <a href="user-guide.html" class="dashboard-nav-item">
+                    <i class="fas fa-book"></i> User Guide
+                </a>
+                <div class="nav-item-divider"></div>
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+    
+        <div class="dashboard-app">
+            <header class="dashboard-toolbar">
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </header>
+    
+            <div class="dashboard-content">
+                <div class="container">
+                    <div class="card">
+                        <section class="p-10 text-center">
+                            <h2 class="text-3xl font-bold">Case Reports</h2>
+                            <div class="flex flex-wrap justify-center mt-6 gap-4 filter-container">
+                                <select id="crimeType" class="text-black p-2 rounded w-full sm:w-auto">
+                                    <option value="">All Crimes</option>
+                                    <option value="Kidnap">Kidnap</option>
+                                    <option value="Force Conversion">Force Conversion</option>
+                                    <option value="Suicide">Suicide</option>
+                                    <option value="Murder">Murder</option>
+                                    <option value="Child Marriage">Child Marriage</option>
+                                    <option value="Land Grabber">Land Grabber</option>
+                                    <option value="Protest Cases">Protest Cases</option>
+                                    <option value="Others Cases">Others</option>
+                                </select>
+                                <input type="date" id="dateFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                                <select id="monthFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                                    <option value="">All Months</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                    
+                    
+                                <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
+                                    class="text-black p-2 rounded w-full sm:w-auto">
+                    
+                                <input type="text" id="nameFilter" placeholder="Search by Name"
+                                    class="text-black p-2 rounded w-full sm:w-auto" />
+                                <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
+                                    <option value="">All Genders</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                    
+                                <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">SEARCH</button>
+                                <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
+                                <!-- Trigger Button -->
+                                <button onclick="openLanguageModal()" class="bg-blue-500 p-2 rounded">Download PDF</button>
+                                     
+                                <!-- Modal -->
+                                <div id="languageModal"
+                                    class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+                                    <div class="bg-white p-6 rounded shadow-lg text-center space-y-4">
+                                        <h2 class="text-xl font-bold">Select PDF Language</h2>
+                                        <button onclick="downloadSelectedPDF('urdu')" class="bg-yellow-500 p-2 rounded w-full">Urdu</button>
+                                        <button onclick="downloadSelectedPDF('english')"
+                                            class="bg-red-500 p-2 rounded w-full">English</button>
+                                        <button onclick="closeLanguageModal()" class="text-gray-500 underline mt-2">Cancel</button>
+                                        
+                                    </div>
+                                </div>
+                    
+                                <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
+                    
+                    
+                    
+                            </div>
+                    
+                            <div class="table-container overflow-auto mt-6">
+                                <table class="w-full text-left border border-gray-700">
+                                    <thead>
+                                        <tr class="bg-gray-700">
+                                            <th class="p-2">S.No</th> <!-- Serial Number Column -->
+                                            <th class="p-2">Timestamp</th>
+                                            <th class="p-2">Date</th>
+                                            <th class="p-2">Day</th>
+                                            <th class="p-2">Time</th>
+                                            <th class="p-2">Victim Name</th>
+                                            <th class="p-2">Case Picture</th>
+                                            <th class="p-2">Gender</th>
+                                            <th class="p-2">Religion</th>
+                                            <th class="p-2">Location</th>
+                                            <th class="p-2 ">Case Description</th>
+                                        </tr>
+                                    </thead>
+                                    <div id="pagination" class="mt-6 flex flex-wrap justify-center gap-2"></div>
+                    
+                    
+                                    <tbody id="reportTable"></tbody>
+                                </table>
+                                
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     
 
-    <section class="p-10 text-center">
-        <h2 class="text-3xl font-bold">Case Reports</h2>
-        <div class="flex flex-wrap justify-center mt-6 gap-4 filter-container">
-            <select id="crimeType" class="text-black p-2 rounded w-full sm:w-auto">
-                <option value="">All Crimes</option>
-                <option value="Kidnap">Kidnap</option>
-                <option value="Force Conversion">Force Conversion</option>
-                <option value="Suicide">Suicide</option>
-                <option value="Murder">Murder</option>
-                <option value="Child Marriage">Child Marriage</option>
-                <option value="Land Grabber">Land Grabber</option>
-                <option value="Protest Cases">Protest Cases</option>
-                <option value="Others">Others</option>
-            </select>
-            <input type="date" id="dateFilter" class="text-black p-2 rounded w-full sm:w-auto">
-            <select id="monthFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                <option value="">All Months</option>
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">August</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-
-
-            <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
-                class="text-black p-2 rounded w-full sm:w-auto">
-
-            <input type="text" id="nameFilter" placeholder="Search by Name"
-                class="text-black p-2 rounded w-full sm:w-auto" />
-            <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                <option value="">All Genders</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <button onclick="filterData()" class="bg-blue-500 p-2 rounded w-full sm:w-auto">SEARCH</button>
-            <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
-            <!-- Trigger Button -->
-            <button onclick="openLanguageModal()" class="bg-blue-500 p-2 rounded">Download PDF</button>
-                 
-            <!-- Modal -->
-            <div id="languageModal"
-                class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-                <div class="bg-white p-6 rounded shadow-lg text-center space-y-4">
-                    <h2 class="text-xl font-bold">Select PDF Language</h2>
-                    <button onclick="downloadSelectedPDF('urdu')" class="bg-yellow-500 p-2 rounded w-full">Urdu</button>
-                    <button onclick="downloadSelectedPDF('english')"
-                        class="bg-red-500 p-2 rounded w-full">English</button>
-                    <button onclick="closeLanguageModal()" class="text-gray-500 underline mt-2">Cancel</button>
-                    
-                </div>
-            </div>
-
-            <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download JPEG</button>
-
-
-
-        </div>
-
-        <div class="table-container overflow-auto mt-6">
-            <table class="w-full text-left border border-gray-700">
-                <thead>
-                    <tr class="bg-gray-700">
-                        <th class="p-2">S.No</th> <!-- Serial Number Column -->
-                        <th class="p-2">Timestamp</th>
-                        <th class="p-2">Date</th>
-                        <th class="p-2">Day</th>
-                        <th class="p-2">Time</th>
-                        <th class="p-2">Victim Name</th>
-                        <th class="p-2">Case Picture</th>
-                        <th class="p-2">Gender</th>
-                        <th class="p-2">Religion</th>
-                        <th class="p-2">Location</th>
-                        <th class="p-2 ">Case Description</th>
-                    </tr>
-                </thead>
-                <div id="pagination" class="mt-6 flex flex-wrap justify-center gap-2"></div>
-
-
-                <tbody id="reportTable"></tbody>
-            </table>
-            
-        </div>
-    </section>
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-    <script src="js/NotoNastaliqUrdu-Regular.js"></script>
+   
 
     <script src="dashboard.js"></script>
     <script src="nav-script.js"></script>

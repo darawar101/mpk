@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="nav-script.js"></script>
     <style>
         body {
             background: url("Background.jpg") no-repeat center center fixed;
@@ -57,85 +59,117 @@
 <body>
     <!-- Navigation Bar -->
    <!-- Navbar -->
-   <nav>
-    <!-- Checkbox for toggling menu -->
-    <input type="checkbox" id="check">
-    <!-- Menu icon -->
-    <label for="check" class="checkbtn">
-        <i class="fas fa-bars"></i>
-    </label>
-    <!-- Site logo -->
-    <label class="logo">Darawar Itehad</label>
-    <!-- Navigation links -->
-    <ul>
+   <div class="dashboard">
+    <div class="dashboard-nav">
+        <header>
+            <a href="#!" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+            <a href="#" class="brand-logo">
+                <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
+            </a>
+        </header>
+        <nav class="dashboard-nav-list">
+            <a href="index.html" class="dashboard-nav-item">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="dashboard.html" class="dashboard-nav-item active">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="stats.html" class="dashboard-nav-item">
+                <i class="fas fa-chart-line"></i> Stats
+            </a>
+            <a href="attendance.html" class="dashboard-nav-item">
+                <i class="fas fa-clipboard-check"></i> Attendance
+            </a>
+            <a href="sheet.html" class="dashboard-nav-item">
+                <i class="fas fa-file-excel"></i> Sheet
+            </a>
+            <a href="user-guide.html" class="dashboard-nav-item">
+                <i class="fas fa-book"></i> User Guide
+            </a>
+            <div class="nav-item-divider"></div>
+            <a href="index.html" class="dashboard-nav-item">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </nav>
+    </div>
 
-        <li><a href="index.html">Home</a></li>
-        <li><a href="https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing"
-                target="_blank">Sheet</a></li>
-        <li><a href="stats.html">Stats</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="attendance.html">Attendance</a></li>
-        <li><a href="user-guide.html">User Guide</a></li>
-    </ul>
-</nav>
+    <div class="dashboard-app">
+        <header class="dashboard-toolbar">
+            <a href="#!" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+        </header>
 
-    <!-- User Guide Content -->
-    <div class="container text-center">
-        <h1 class="text-4xl font-bold text-blue-400 my-6">📖 User Guide</h1>
-
-        <div class="section">
-            <h2>🏠 Accessing the Dashboard</h2>
-            <p>Navigate to the dashboard to view system statistics and manage data efficiently. Use the sidebar navigation to switch between sections.</p>
-        </div>
-
-        <div class="section">
-            <h2>📝 Filing a New Complaint</h2>
-            <p>To file a new complaint:
-                <ul>
-                    <li>Go to the <strong>Home Page</strong>.</li>
-                    <li>Select <strong>Complaint Type</strong> from the available options.</li>
-                    <li>Fill in the required details, such as Name, Contact Information, and Complaint Description.</li>
-                    <li>Click <strong>Submit</strong> to send your complaint for processing.</li>
-                </ul>
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>🌍 Using Language Filters</h2>
-            <p>You can filter content by language:
-                <ul>
-                    <li>Locate the Language Filter in the navigation bar.</li>
-                    <li>Select <strong>Sindhi, English, or Urdu</strong> to switch content language.</li>
-                    <li>Once selected, the page content updates automatically.</li>
-                    <li>To reset, select "All Languages" or refresh the page.</li>
-                </ul>
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>📊 Viewing Statistics</h2>
-            <p>To analyze reports:
-                <ul>
-                    <li>Go to the <strong>Stats</strong> section.</li>
-                    <li>View case statistics through charts and tables.</li>
-                    <li>Apply filters to sort reports based on categories.</li>
-                    <li>Export or download reports if the feature is available.</li>
-                </ul>
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>⚙️ Troubleshooting</h2>
-            <p>If you experience issues:
-                <ul>
-                    <li>Ensure your browser is up to date.</li>
-                    <li>Refresh the page if content does not load correctly.</li>
-                    <li>Clear browser cache if filters or buttons are unresponsive.</li>
-                    <li>Contact support if the issue persists.</li>
-                </ul>
-            </p>
+        <div class="dashboard-content">
+            <div class="container">
+                <div class="card">
+                    <div class="container text-center">
+                        <h1 class="text-4xl font-bold text-blue-400 my-6">📖 User Guide</h1>
+                
+                        <div class="section">
+                            <h2>🏠 Accessing the Dashboard</h2>
+                            <p>Navigate to the dashboard to view system statistics and manage data efficiently. Use the sidebar navigation to switch between sections.</p>
+                        </div>
+                
+                        <div class="section">
+                            <h2>📝 Filing a New Complaint</h2>
+                            <p>To file a new complaint:
+                                <ul>
+                                    <li>Go to the <strong>Home Page</strong>.</li>
+                                    <li>Select <strong>Complaint Type</strong> from the available options.</li>
+                                    <li>Fill in the required details, such as Name, Contact Information, and Complaint Description.</li>
+                                    <li>Click <strong>Submit</strong> to send your complaint for processing.</li>
+                                </ul>
+                            </p>
+                        </div>
+                
+                        <div class="section">
+                            <h2>🌍 Using Language Filters</h2>
+                            <p>You can filter content by language:
+                                <ul>
+                                    <li>Locate the Language Filter in the navigation bar.</li>
+                                    <li>Select <strong>Sindhi, English, or Urdu</strong> to switch content language.</li>
+                                    <li>Once selected, the page content updates automatically.</li>
+                                    <li>To reset, select "All Languages" or refresh the page.</li>
+                                </ul>
+                            </p>
+                        </div>
+                
+                        <div class="section">
+                            <h2>📊 Viewing Statistics</h2>
+                            <p>To analyze reports:
+                                <ul>
+                                    <li>Go to the <strong>Stats</strong> section.</li>
+                                    <li>View case statistics through charts and tables.</li>
+                                    <li>Apply filters to sort reports based on categories.</li>
+                                    <li>Export or download reports if the feature is available.</li>
+                                </ul>
+                            </p>
+                        </div>
+                
+                        <div class="section">
+                            <h2>⚙️ Troubleshooting</h2>
+                            <p>If you experience issues:
+                                <ul>
+                                    <li>Ensure your browser is up to date.</li>
+                                    <li>Refresh the page if content does not load correctly.</li>
+                                    <li>Clear browser cache if filters or buttons are unresponsive.</li>
+                                    <li>Contact support if the issue persists.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+
+    <!-- User Guide Content -->
+    
 
     <script src="nav-script.js"></script>
 </body>

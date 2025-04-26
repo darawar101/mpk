@@ -1,21 +1,19 @@
-
-document.querySelector('.inbox').addEventListener('click', function() {
-    window.open('https://docs.google.com/spreadsheets/d/1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs/edit?usp=sharing', '_blank');
+const mobileScreen = window.matchMedia("(max-width: 990px )");
+$(document).ready(function () {
+    $(".dashboard-nav-dropdown-toggle").click(function () {
+        $(this).closest(".dashboard-nav-dropdown")
+            .toggleClass("show")
+            .find(".dashboard-nav-dropdown")
+            .removeClass("show");
+        $(this).parent()
+            .siblings()
+            .removeClass("show");
+    });
+    $(".menu-toggle").click(function () {
+        if (mobileScreen.matches) {
+            $(".dashboard-nav").toggleClass("mobile-show");
+        } else {
+            $(".dashboard").toggleClass("dashboard-compact");
+        }
+    });
 });
-
-document.querySelector('.home').addEventListener('click', function() {
-window.location.href = 'index.html';
-});
-
-document.querySelector('.contact').addEventListener('click', function() {
-window.location.href = 'stats.html';
-});
-
-document.querySelector('.about').addEventListener('click', function() {
-window.location.href = 'user-guide.html';
-});
-
-document.querySelector('.heart').addEventListener('click', function() {
-window.location.href = 'dashboard.html';
-});
-

@@ -193,6 +193,7 @@ function displayData(data = filteredData, page = 1) {
 
     createPaginationControls(data.length);
 }
+filteredData = allData;
 
 function createPaginationControls(totalCases) {
     const paginationContainer = document.getElementById("pagination");
@@ -205,8 +206,9 @@ function createPaginationControls(totalCases) {
         button.innerText = i;
         button.className = `px-3 py-1 m-1 border rounded ${i === currentPage ? "bg-blue-600 text-white" : "bg-gray-200"}`;
         button.addEventListener("click", () => {
-            displayData(allData, i);
+            displayData(filteredData, i);
         });
+        
         paginationContainer.appendChild(button);
     }
 }
