@@ -20,7 +20,21 @@
     <script src="nav-script.js"></script>
     <link rel="stylesheet" href="nav.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        footer{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .f-text{
+            color: blue;
+            font-family: "Roboto", sans-serif;
+            font-size: 15px;
+        }
         @media (max-width: 640px) {
+
             .filter-container {
                 flex-direction: column;
                 align-items: center;
@@ -39,7 +53,7 @@
         }
 
         body {
-            background: url("Adobe Express - file (1) (1).png") no-repeat center center fixed;
+            
             /* background-size: cover; */
             color: white;
             font-family: 'Inter', sans-serif;
@@ -155,23 +169,55 @@
 .delay-700 {
     animation-delay: 0.7s;
 }
-        /* Slight scale effect on button hover */
+
+.h-text{
+    font-size: 35px;
+    font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  color: #4F46E5;
+  
+
+}
+.h-text-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.bg-33{
+    background: url("background.jpg") no-repeat center center fixed;
+   
+    
+}
+.bg-33::before{
+    content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 30, 48, 0.527);
+            z-index: -1;
+}
     </style>
 </head>
 
 <body class=" text-white">
 
 
-    <div id="passwordModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-        <div class="glass w-96 text-center p-6 text-white border border-gray-300 shadow-lg">
+    <div id="passwordModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 bg-33" >
+        <div class="glass w-96 text-center p-6 text-white border border-gray-300 shadow-lg ">
             <img src="Adobe Express - file (1) (1).png" alt="NGO Logo" class="w-20 mx-auto mb-3 rounded-full">
-            <!-- Logo -->
+            
             <h2 class="text-2xl font-bold mb-4">Enter Password</h2>
             <input type="password" id="passwordInput"
                 class="border p-3 w-full rounded-lg text-center bg-transparent text-white placeholder-gray-300 border-gray-400"
                 placeholder="Enter password">
             <button onclick="checkPassword()"
-                class="mt-4 bg-green-500 text-white px-5 py-2 rounded-lg w-full hover:bg-green-600 transition-all">Unlock</button>
+                class="mt-4 bg-blue-500 text-white px-5 py-2 rounded-lg w-full hover:bg-blue-600 transition-all">Unlock</button>
             <p id="errorText" class="text-red-500 mt-2 hidden">Incorrect Password!</p>
         </div>
     </div>
@@ -188,12 +234,13 @@
                     <a href="#" class="brand-logo">
                         <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
                     </a>
+                    
                 </header>
                 <nav class="dashboard-nav-list">
                     <a href="index.html" class="dashboard-nav-item">
                         <i class="fas fa-home"></i> Home
                     </a>
-                    <a href="dashboard.html" class="dashboard-nav-item active">
+                    <a href="dashboard.html" class="dashboard-nav-item ">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                     <a href="stats.html" class="dashboard-nav-item">
@@ -216,17 +263,19 @@
             </div>
         
             <div class="dashboard-app">
-                <header class="dashboard-toolbar">
+                <header class="dashboard-toolbar d-n">
                     <a href="#!" class="menu-toggle">
                         <i class="fas fa-bars"></i>
                     </a>
+                    
+                    
                 </header>
         
                 <div class="dashboard-content">
                     <div class="container">
                         <div class="card">
                             <div class="card-header text-center py-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-t-2xl shadow-lg animate-fadeInDown">
-                                <h1 class="text-4xl font-bold">Welcome back, social worker!</h1>
+                                <h1 class="text-4xl font-bold">Welcome back, Social Worker!</h1>
                             </div>
                             
                             <div class="card-body bg-gray-100 p-10 rounded-b-2xl shadow-xl animate-fadeInUp">
@@ -328,7 +377,9 @@
         <!-- Issues Section -->
 
 
-        <center>ALL CREDITS PAKISTAN DARAWAR ITEHAD TEAM @2025 </center>
+       <footer>
+            <p class="f-text">ALL CREDITS PAKISTAN DARAWAR ITEHAD TEAM &#64;2025</p>
+       </footer>
     </div>
     <script>
         function checkPassword() {

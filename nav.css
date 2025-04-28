@@ -81,7 +81,7 @@ h1, .h1 {
   word-wrap: break-word;
  
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  
   border-radius: 0;
 }
 
@@ -246,7 +246,9 @@ h1, .h1 {
 }
 
 .dashboard-nav-item:hover {
-  background: rgba(255, 255, 255, 0.04);
+  
+  background-color: white;
+  color: #443ea2;
 }
 
 .active {
