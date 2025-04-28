@@ -99,7 +99,7 @@ function downloadurdu() {
             for (let i = startIndex; i < Math.min(startIndex + rowsPerPage, rows.length); i++) {
                 rows[i].style.display = "";
             }
-
+ 
             captureAndAddToPDF(() => processRows(startIndex + rowsPerPage)); // Process next set
         }
 
@@ -110,10 +110,14 @@ function downloadurdu() {
 
 let allData = [];
 async function fetchData() {
+    const loader = document.getElementById("loader");
+    loader.style.display = "flex"; // Show loader
+
     const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
     const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
     const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap"];
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
+
     try {
         const response = await fetch(url);
         const json = await response.json();
@@ -132,11 +136,15 @@ async function fetchData() {
                 });
             }
         });
+        filteredData = allData; // <-- Also update filteredData
         displayData(allData);
     } catch (error) {
         console.error("Error fetching data:", error);
+    } finally {
+        loader.style.display = "none"; // Hide loader after everything is done
     }
 }
+
 
 function formatDateForDisplay(dateString) {
     if (!dateString) return "";
