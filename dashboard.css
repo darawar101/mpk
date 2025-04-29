@@ -1,0 +1,218 @@
+/* Add to styles.css */
+
+@media (max-width: 640px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-container select,
+    .filter-container input,
+    .filter-container button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .responsive-name {
+        font-size: 1.20rem !important;
+    }
+}
+
+body {
+    background: url("Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 30, 48, 0.8);
+    /* Dark overlay to improve text readability */
+    z-index: -1;
+}
+
+.table-container table {
+    background: rgba(30, 30, 30, 0.9);
+    /* Darker background for better contrast */
+    color: white;
+    border-collapse: collapse;
+}
+
+.table-container th {
+    background: #453ea271;
+    /* Darker header */
+    color: white;
+}
+
+.table-container td {
+    background: #453ea271;
+    /* Slightly lighter than the header */
+    color: white;
+    border: 1px solid rgba(100, 100, 100, 0.5);
+}
+
+.table-container tr:hover {
+    background: rgba(70, 70, 70, 0.9);
+    /* Highlight row on hover */
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+    min-width: 120px;
+    /* Adjust width as needed */
+    text-align: center;
+    /* Center align for better readability */
+}
+
+
+.dc-t {
+    font-family: "Lateef", serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 25px;
+
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    /* Ensures it stays in place */
+
+    z-index: 9999;
+    /* To make sure it's on top of other content */
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+
+
+}
+
+.card2 {
+    display: flex;
+    justify-content: center;
+    align-items: bottom;
+    background-color: #28a745;
+}
+
+
+/* Hexagon Shape */
+.hexagon {
+    width: 100px;
+    height: 115px;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotateHexagon 2s linear infinite;
+}
+
+/* Hexagon Sides */
+.hexagon:before,
+.hexagon:after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #007bff;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transform: rotate(30deg);
+    animation: pulse 2s infinite;
+}
+
+.hexagon:after {
+    background-color: #28a745;
+    animation-delay: 1s;
+}
+
+/* Pulse effect for color transition */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Rotation animation */
+@keyframes rotateHexagon {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Text below the loader */
+.loader-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 2px;
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+/* Text Fade-In and Fade-Out Animation */
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+#loaderLogo {
+    width: 150px;
+    /* Adjust to fit your logo's size */
+    height: auto;
+    animation: rotate 10s linear infinite;
+    /* Slow rotation */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animation for fading in the table */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Start slightly below */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        /* End at normal position */
+    }
+}
+
+/* Apply the animation to the table */

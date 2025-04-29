@@ -106,6 +106,25 @@ function downloadurdu() {
         processRows(0);
     };
 }
+window.addEventListener('load', async () => {
+    document.getElementById('loader').style.display = 'flex'; // Show loader with logo
+    document.getElementById('mainContent').style.display = 'none';
+  
+    await fetchData(); // Your data fetching function
+  
+    document.getElementById('loader').style.display = 'none'; // Hide loader
+    document.getElementById('mainContent').style.display = 'block'; // Show main content
+});
+
+window.addEventListener('load', async () => {
+    document.getElementById('loader').style.display = 'flex';
+    document.getElementById('mainContent').style.display = 'none';
+  
+    await fetchData(); // Your data fetching function
+  
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+});
 
 
 let allData = [];
@@ -351,12 +370,18 @@ function downloadTableAsPDF() {
     });
 
     doc.setFont("NotoNastaliqUrdu-Regular");
-
     doc.setFontSize(10);
-
 
     // Track total pages
     const totalPagesExp = "{total_pages_count_string}";
+
+    // Calculate a proportionate column width
+    const columnWidths = [15, 20, 25, 20, 25, 40, 20, 25, 40, 50];
+    const totalWidth = columnWidths.reduce((sum, width) => sum + width, 0);
+    const scale = 190 / totalWidth; // Scale factor to ensure it fits on an A4 page
+
+    // Apply the scale factor to adjust column widths dynamically
+    const scaledColumnWidths = columnWidths.map(width => width * scale);
 
     doc.autoTable({
         startY: 25,
@@ -371,23 +396,23 @@ function downloadTableAsPDF() {
             lineColor: [0, 0, 0],
         },
         columnStyles: {
-            0: { cellWidth: 10 },
-            1: { cellWidth: 20 },
-            2: { cellWidth: 15 },
-            3: { cellWidth: 12 },
-            4: { cellWidth: 15 },
-            5: { cellWidth: 25 },
-            6: { cellWidth: 15 },
-            7: { cellWidth: 18 },
-            8: { cellWidth: 25 },
-            9: { cellWidth: 35 },
+            0: { cellWidth: scaledColumnWidths[0] },
+            1: { cellWidth: scaledColumnWidths[1] },
+            2: { cellWidth: scaledColumnWidths[2] },
+            3: { cellWidth: scaledColumnWidths[3] },
+            4: { cellWidth: scaledColumnWidths[4] },
+            5: { cellWidth: scaledColumnWidths[5] },
+            6: { cellWidth: scaledColumnWidths[6] },
+            7: { cellWidth: scaledColumnWidths[7] },
+            8: { cellWidth: scaledColumnWidths[8] },
+            9: { cellWidth: scaledColumnWidths[9] }
         },
         headStyles: {
             fillColor: [41, 128, 185],
             textColor: 255,
             halign: 'center',
         },
-        tableWidth: "wrap",
+        tableWidth: 'wrap', // This ensures the table wraps to fit within the page width
 
         didDrawPage: function (data) {
             // Title on every page
@@ -410,6 +435,9 @@ function downloadTableAsPDF() {
 
     doc.save("case_reports.pdf");
 }
+
+
+
 
 
 function downloadTableAsJPEG() {
@@ -466,4 +494,11 @@ function downloadSelectedPDF(language) {
     } else if (language === 'sindhi') {
         downloadSindhiPDF(); // Make sure this function exists
     }
+}
+
+function loadTableData() {
+    // Fetch the data and populate the table (your existing logic here)
+    
+    // After data is inserted into the table, trigger the animation
+    document.getElementById('mainContent').style.animation = 'fadeIn 1s ease-out';
 }
