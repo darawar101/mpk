@@ -299,7 +299,7 @@ section{
   }
   @media (max-width: 768px) {
     .table-container{
-        width: 33%;
+        width: 31%;
     }
     body::before {
       background: rgba(20, 30, 48, 0.95);
