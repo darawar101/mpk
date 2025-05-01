@@ -106,7 +106,9 @@ body::before {
     color: white;
     border-collapse: collapse;
 }
-
+.table-container{
+    width: 33%;
+}
 .table-container th {
     background: #453ea271;
     /* Darker header */
