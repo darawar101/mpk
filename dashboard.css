@@ -106,9 +106,7 @@ body::before {
     color: white;
     border-collapse: collapse;
 }
-.table-container{
-    width: 33%;
-}
+
 .table-container th {
     background: #453ea271;
     /* Darker header */
@@ -300,6 +298,9 @@ section{
     }
   }
   @media (max-width: 768px) {
+    .table-container{
+        width: 33%;
+    }
     body::before {
       background: rgba(20, 30, 48, 0.95);
     }
