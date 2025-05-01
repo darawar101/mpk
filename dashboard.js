@@ -204,17 +204,17 @@ function displayData(data = filteredData, page = 1) {
         let formattedDate = formatDateForDisplay(row["Date"]);
 
         table.innerHTML += `<tr class='border border-gray-700'>
-            <td class='p-2' translate="no">${startIndex + index + 1}</td>
-            <td class='p-2' translate="no">${row.Timestamp}</td>
+            <td class='p-2 ' translate="no">${startIndex + index + 1}</td>
+            <td class='p-2 ' translate="no">${row.Timestamp}</td>
             <td class='p-2' translate="no">${formattedDate}</td>
-            <td class='p-2' translate="no">${row.Day}</td>
-            <td class='p-2' translate="no">${row.Time}</td>
-            <td class='p-2' translate="no">${row["Victim Name"]}</td>
+            <td class='p-2 ' translate="no">${row.Day}</td>
+            <td class='p-2 ' translate="no">${row.Time}</td>
+            <td class='p-2 ' translate="no">${row["Victim Name"]}</td>
             <td class='p-2' translate="no"><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
-            <td class='p-2' translate="no">${row.Gender}</td>
-            <td class='p-2' translate="no">${row.Religion}</td>
-            <td class='p-2' translate="no">${row.Location}</td>
-            <td class='p-2 dc-t'>${row["Case Description"]}</td>
+            <td class='p-2 ' translate="no">${row.Gender}</td>
+            <td class='p-2 ' translate="no">${row.Religion}</td>
+            <td class='p-2 ' translate="no">${row.Location}</td>
+            <td class='p-2  dc-t'>${row["Case Description"]}</td>
         </tr>`;
     });
 
@@ -501,4 +501,48 @@ function loadTableData() {
     
     // After data is inserted into the table, trigger the animation
     document.getElementById('mainContent').style.animation = 'fadeIn 1s ease-out';
+}
+
+
+
+
+function openFilterModal() {
+    document.getElementById('filterModal').classList.remove('hidden');
+  }
+
+  function closeFilterModal() {
+    document.getElementById('filterModal').classList.add('hidden');
+  }
+
+  function applyFilters() {
+    closeFilterModal();
+    filterData(); // Call your filter function here
+  }
+
+
+  const c = document.querySelector('.container')
+const indexs = Array.from(document.querySelectorAll('.index'))
+let cur = -1
+indexs.forEach((index, i) => {
+  index.addEventListener('click', (e) => {
+    // clear
+    c.className = 'container'
+    void c.offsetWidth; // Reflow
+    c.classList.add('open')
+    c.classList.add(`i${i + 1}`)
+    if (cur > i) {
+      c.classList.add('flip')
+    }
+    cur = i
+  })
+})
+
+
+
+function clearFilters() {
+    document.getElementById('crimeType').value = '';
+    document.getElementById('genderFilter').value = '';
+    document.getElementById('dateFilter').value = '';
+    document.getElementById('monthFilter').value = '';
+    document.getElementById('yearFilter').value = '';
 }

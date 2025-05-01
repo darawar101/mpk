@@ -31,8 +31,8 @@
 <body class="bg-gray-900 text-white">
     <!-- Navbar -->
     <div class="dashboard">
-        <div class="dashboard-nav" id="navbar">                 
-            <header >
+        <div class="dashboard-nav" id="navbar">
+            <header>
                 <a href="#!" class="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </a>
@@ -79,78 +79,99 @@
 
                     <div class="card">
 
-                        <section class="p-10 text-center">
+                        <section class="p-10 ">
                             <h2 class="text-3xl font-bold">Case Reports</h2>
-                            <div class="flex flex-wrap justify-center mt-6 gap-4 filter-container">
-                                <select id="crimeType" class="text-black p-2 rounded w-full sm:w-auto">
-                                    <option value="">All Crimes</option>
-                                    <option value="Kidnap">Kidnap</option>
-                                    <option value="Force Conversion">Force Conversion</option>
-                                    <option value="Suicide">Suicide</option>
-                                    <option value="Murder">Murder</option>
-                                    <option value="Child Marriage">Child Marriage</option>
-                                    <option value="Land Grabber">Land Grabber</option>
-                                    <option value="Protest Cases">Protest Cases</option>
-                                    <option value="Others Cases">Others</option>
-                                </select>
-                                <input type="date" id="dateFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                                <select id="monthFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                                    <option value="">All Months</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
+                            <div class="head-main">
 
 
-                                <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
-                                    class="text-black p-2 rounded w-full sm:w-auto">
-
-                                <input type="text" id="nameFilter" placeholder="Search by Name"
-                                    class="text-black p-2 rounded w-full sm:w-auto" />
-                                <select id="genderFilter" class="text-black p-2 rounded w-full sm:w-auto">
-                                    <option value="">All Genders</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-
-                                <button onclick="filterData()"
-                                    class="bg-blue-500 p-2 rounded w-full sm:w-auto">SEARCH</button>
-                                <!-- <button onclick="downloadCSV()" class="bg-green-500 p-2 rounded w-full sm:w-auto">Download CSV</button> -->
-                                <!-- Trigger Button -->
-                                <button onclick="openLanguageModal()" class="bg-blue-500 p-2 rounded">Download
-                                    PDF</button>
-
-                                <!-- Modal -->
-                                <div id="languageModal"
-                                    class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-                                    <div class="bg-white p-6 rounded shadow-lg text-center space-y-4">
-                                        <h2 class="text-xl font-bold">Select PDF Language</h2>
-                                        <button onclick="downloadSelectedPDF('urdu')"
-                                            class="bg-yellow-500 p-2 rounded w-full">Urdu</button>
-                                        <button onclick="downloadSelectedPDF('english')"
-                                            class="bg-red-500 p-2 rounded w-full">English</button>
-                                        <button onclick="closeLanguageModal()"
-                                            class="text-gray-500 underline mt-2">Cancel</button>
-
-                                    </div>
+                                <button onclick="openFilterModal()" class="bg-blue-500 text-white px-4 py-2 rounded">
+                                    <i class="fas fa-filter"></i> Filters
+                                </button>
+                                <div class="search-box">
+                                    <button class="btn-search"><i class="fas fa-search"
+                                            onclick="filterData()"></i></button>
+                                    <input type="text" class="input-search" placeholder="Type to Search..."
+                                        id="nameFilter">
                                 </div>
+                                <img onclick="openLanguageModal()" class="pdf-btn cursor" src="pdf.png">
+                                <div id="languageModal"
+                                class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+                                <div class="bg-white p-6 rounded shadow-lg text-center space-y-4">
+                                    <h2 class="text-xl font-bold">Select PDF Language</h2>
+                                    <button onclick="downloadSelectedPDF('urdu')"
+                                        class="bg-yellow-500 p-2 rounded w-full">Urdu</button>
+                                    <button onclick="downloadSelectedPDF('english')"
+                                        class="bg-red-500 p-2 rounded w-full">English</button>
+                                    <button onclick="closeLanguageModal()"
+                                        class="text-gray-500 underline mt-2">Cancel</button>
 
-                                <button onclick="downloadTableAsJPEG()" class="bg-green-500 p-2 rounded">Download
-                                    JPEG</button>
-
-
+                                </div>
+                            </div>
 
                             </div>
+                            <div id="filterModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+                                <div class="bg-white text-black p-6 rounded-2xl shadow-2xl w-full max-w-3xl mx-4 transition-all duration-300">
+                                    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6 border-b pb-2">🔍 Filter Case Reports</h2>
+                            
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                        <select id="crimeType" class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                            <option value="">All Crimes</option>
+                                            <option value="Kidnap">Kidnap</option>
+                                            <option value="Force Conversion">Force Conversion</option>
+                                            <option value="Suicide">Suicide</option>
+                                            <option value="Murder">Murder</option>
+                                            <option value="Child Marrige">Child Marriage</option>
+                                            <option value="Land Grabber">Land Grabber</option>
+                                            <option value="Protest Cases">Protest Cases</option>
+                                            <option value="Others Cases">Others</option>
+                                        </select>
+                            
+                                        <select id="genderFilter" class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                            <option value="">All Genders</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Prefer not to say">Prefer not to say</option>
+                                        </select>
+                            
+                                        <input type="date" id="dateFilter" class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                            
+                                        <select id="monthFilter" class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                            <option value="">All Months</option>
+                                            <option value="01">January</option>
+                                            <option value="02">February</option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>   
+                            
+                                        <input type="number" id="yearFilter" placeholder="Year" min="2000" max="2100"
+                                            class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                            
+                                    <div class="flex justify-end items-center gap-4 mt-8">
+                                        <button onclick="applyFilters()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl shadow">
+                                            Apply
+                                        </button>
+                                        <button onclick="clearFilters()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-xl shadow">
+                                            Clear Filters
+                                        </button>
+                                        <button onclick="closeFilterModal()" class="text-gray-600 hover:text-gray-900 underline">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+
+
 
                             <div class="table-container overflow-auto mt-6">
                                 <div class="card2">
@@ -159,7 +180,7 @@
                                         <div class="loader-text">PDI - Loading...</div>
                                     </div>
                                 </div>
-                                <table class="w-full text-left border border-gray-700" id="mainContent" >
+                                <table class="min-w-[1000px] w-full text-left border border-gray-700" id="mainContent">
                                     <thead>
                                         <tr class="bg-gray-700">
                                             <th class="p-2">S.No</th> <!-- Serial Number Column -->
@@ -175,11 +196,12 @@
                                             <th class="p-2 w-100px ">Case Description</th>
                                         </tr>
                                     </thead>
-                                    <div id="pagination" class="mt-6 flex flex-wrap justify-center gap-2"></div>
+                                    <div id="pagination" class="mt-6 flex flex-wrap justify-center items-center gap-2 px-2 sm:px-4 text-sm sm:text-base"></div>
 
 
 
-                                    <tbody id="reportTable"></tbody>
+
+                                    <tbody id="reportTable" class=""></tbody>
                                 </table>
 
                             </div>
@@ -193,7 +215,7 @@
 
 
 
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
