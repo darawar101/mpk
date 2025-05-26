@@ -200,7 +200,8 @@ function displayData(data = filteredData, page = 1) {
     const paginatedData = data.slice(startIndex, endIndex);
 
     paginatedData.forEach((row, index) => {
-        let imageUrl = row["Case Picture"];
+       let imageUrl = convertDriveLink(row["Case Picture"]);
+
         let formattedDate = formatDateForDisplay(row["Date"]);
 
         table.innerHTML += `<tr class='border border-gray-700'>
@@ -210,11 +211,20 @@ function displayData(data = filteredData, page = 1) {
             <td class='p-2 ' translate="no">${row.Day}</td>
             <td class='p-2 ' translate="no">${row.Time}</td>
             <td class='p-2 ' translate="no">${row["Victim Name"]}</td>
-            <td class='p-2' translate="no"><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
+           
             <td class='p-2 ' translate="no">${row.Gender}</td>
             <td class='p-2 ' translate="no">${row.Religion}</td>
             <td class='p-2 ' translate="no">${row.Location}</td>
             <td class='p-2  dc-t'>${row["Case Description"]}</td>
+            <td class='p-2' translate="no">
+  ${
+    imageUrl
+      ? `<img src="${imageUrl}" alt="Case Image" class="max-w-[200px] max-h-[200px] object-cover rounded border border-gray-300" referrerpolicy="no-referrer"/>`
+      : `<div class="w-[100px] h-[100px] flex items-center justify-center text-sm bg-gray-100 text-gray-500 border border-gray-300 rounded text-center p-2">No case image</div>`
+  }
+</td>
+
+
         </tr>`;
     });
 
@@ -257,8 +267,9 @@ function displayLatestCase(data) {
     // Get the latest case (first entry after sorting)
     const latestCase = data[0];
 
-    let imageUrl = latestCase["Case Picture"];
-    let formattedDate = formatDateForDisplay(latestCase["Date"]); // Convert to DD/MM/YYYY
+  let imageUrl = convertDriveLink(latestCase["Case Picture"]);
+
+    let formattedDate = formatDateForDisplay(latestCase["Date"]); 
 
     table.innerHTML += `<tr class='border border-gray-700'>
 <td class='p-2'>${latestCase.Timestamp}</td>
@@ -266,12 +277,41 @@ function displayLatestCase(data) {
 <td class='p-2'>${latestCase.Day}</td>
 <td class='p-2'>${latestCase.Time}</td>
 <td class='p-2'>${latestCase["Victim Name"]}</td>
-<td class='p-2'><a href='${imageUrl}' target='_blank' class='bg-blue-500 text-white px-3 py-1 rounded'>Image</a></td>
+
 <td class='p-2'>${latestCase.Gender}</td>
 <td class='p-2'>${latestCase.Religion}</td>
 <td class='p-2'>${latestCase.Location}</td>
 <td class='p-2'>${latestCase["Case Description"]}</td>
+<td class='p-2' translate="no">
+  ${
+    imageUrl
+      ? `<img src="${imageUrl}" alt="Case Image" class="max-w-[100px] max-h-[100px] object-cover rounded border border-gray-300" referrerpolicy="no-referrer"/>`
+      : `<div class="w-[100px] h-[100px] flex items-center justify-center text-sm bg-gray-100 text-gray-500 border border-gray-300 rounded text-center p-2">No case image</div>`
+  }
+</td>
+
 </tr>`;
+
+}
+
+function convertDriveLink(link) {
+    if (!link) return "";
+
+    // Match file ID in either /d/FILE_ID/ or /d/FILE_ID pattern
+    let match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
+
+    // Or match ?id=FILE_ID pattern
+    if (!match) {
+        match = link.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    }
+
+    if (match && match[1]) {
+        // Return Google Drive thumbnail URL
+        return `https://drive.google.com/thumbnail?id=${match[1]}`;
+    }
+
+    // If no match, return original link
+    return link;
 }
 
 
@@ -348,7 +388,7 @@ function downloadTableAsPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF("p", "mm", "a4");
 
-    const headers = [["S.No", "Timestamp", "Date", "Day", "Time", "Victim Name", "Gender", "Religion", "Location", "Case Description"]];
+    const headers = [["S.No", "Timestamp", "Date", "Day", "Time", "Victim Name", "Religion", "City", "Case Description", ]];
     const rows = [];
 
     const tableRows = document.querySelectorAll("#reportTable tr");
@@ -384,7 +424,7 @@ function downloadTableAsPDF() {
     const scaledColumnWidths = columnWidths.map(width => width * scale);
 
     doc.autoTable({
-        startY: 25,
+        startY: 30  ,
         head: headers,
         body: rows,
         styles: {
@@ -546,3 +586,6 @@ function clearFilters() {
     document.getElementById('monthFilter').value = '';
     document.getElementById('yearFilter').value = '';
 }
+
+
+
