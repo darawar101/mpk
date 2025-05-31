@@ -2,54 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Darawar Pakistan Dashboard - Critical Error</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🚨 CRITICAL ALERT - Darawar Pakistan Dashboard DOWN</title>
   <style>
-    @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
+    @keyframes flashBackground {
+      0%, 100% { background-color: #b30000; }
+      50% { background-color: #ff0000; }
     }
-    @keyframes flash {
-      0% { box-shadow: 0 0 0 4px red; }
-      50% { box-shadow: 0 0 20px 6px red; }
-      100% { box-shadow: 0 0 0 4px red; }
+    @keyframes blinkText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
     }
-    .blink {
-      animation: blink 1s infinite;
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #b30000;
+      animation: flashBackground 1s infinite;
+      font-family: 'Arial Black', Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 1rem;
     }
-    .flash-border {
-      animation: flash 1s infinite;
-    }
-    .shake {
+
+    .icon {
+      font-size: 8rem;
       animation: shake 0.5s infinite;
+      text-shadow:
+        0 0 20px yellow,
+        0 0 40px yellow,
+        0 0 60px orange;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin: 0.2rem 0;
+      font-weight: 900;
+      color: yellow;
+      text-shadow: 0 0 10px black;
+      animation: blinkText 1.2s infinite;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin: 0.5rem 0 1rem 0;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 8px black;
+    }
+
+    .contacts {
+      background: #330000cc;
+      border: 3px solid yellow;
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      max-width: 400px;
+      margin-top: 2rem;
+      line-height: 1.5;
+    }
+
+    .contacts strong {
+      color: yellow;
+    }
+
+    button.retry-btn {
+      margin-top: 2.5rem;
+      padding: 1rem 3rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: yellow;
+      color: black;
+      box-shadow: 0 0 20px yellow;
+      transition: background-color 0.3s ease;
+    }
+    button.retry-btn:hover {
+      background-color: orange;
     }
   </style>
 </head>
-<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+<body>
 
-  <div class="bg-red-900 text-white p-8 rounded-2xl flash-border max-w-md w-full text-center border-4 border-red-600">
-    <div class="text-4xl shake">⚠️</div>
-    <h1 class="text-2xl font-bold mt-4 text-yellow-300 blink">CRITICAL ERROR</h1>
-    <p class="mt-4 text-lg font-semibold">
-      <span class="text-white">Darawar Pakistan Dashboard</span> is currently <span class="text-yellow-400">NOT WORKING</span> due to a serious issue.
-    </p>
-    <p class="mt-4">
-      🔧 Please contact:
-    </p>
-    <ul class="mt-2 text-left ml-6 list-disc text-yellow-200 font-medium">
-      <li><strong>Dashboard Manager:</strong> Ahmed</li>
-      <li><strong>Admin:</strong> Shiva Kachi</li>
-    </ul>
-    <button onclick="location.reload()" class="mt-6 px-5 py-2 rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold">
-      🔁 Try Again
-    </button>
+  <div class="icon" role="img" aria-label="Warning sign">🚨</div>
+  <h1>CRITICAL SYSTEM FAILURE</h1>
+  <h2>Darawar Pakistan Dashboard is DOWN</h2>
+
+  <div class="contacts">
+    🔥 <strong>EMERGENCY CONTACTS:</strong><br />
+    🛠️ Dashboard Manager: <strong>Ahmed</strong><br />
+    🧰 Admin: <strong>Shiva Kachi</strong>
   </div>
+
+  <button class="retry-btn" onclick="location.reload()">🔁 RETRY</button>
+
+  <audio id="siren" loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg" />
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const siren = document.getElementById('siren');
+    // Try to play sound on load; many browsers require user interaction to play sound,
+    // so if it fails, user can click Retry button to reload and try again.
+    window.onload = () => {
+      siren.volume = 0.7;
+      siren.play().catch(() => {
+        // Autoplay might be blocked, so no error shown.
+        console.warn("Autoplay blocked; sound won't play until user interacts.");
+      });
+    };
+  </script>
 
 </body>
 </html>
