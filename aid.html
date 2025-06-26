@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="Adobe Express - file (1) (1).png">
+    <link rel="stylesheet" href="nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="nav-script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title>Attendance</title>
+    <style>
+        /* Full page layout */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* Iframe Container */
+        .iframe-container {
+            position: absolute;
+            top: 80px;
+            /* Space for navbar */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .costum22 {
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="dashboard-nav">
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a href="#" class="brand-logo">
+                    <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
+                </a>
+            </header>
+            <nav class="dashboard-nav-list">
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="dashboard.html" class="dashboard-nav-item ">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="stats.html" class="dashboard-nav-item">
+                    <i class="fas fa-chart-line"></i> Stats
+                </a>
+                <a href="attendance.html" class="dashboard-nav-item">
+                    <i class="fas fa-clipboard-check"></i> Attendance
+                </a>
+                <a href="sheet.html" class="dashboard-nav-item">
+                    <i class="fas fa-file-excel"></i> Sheet
+                </a>
+                <a href="user-guide.html" class="dashboard-nav-item">
+                    <i class="fas fa-book"></i> User Guide
+                </a>
+                </a>
+                <hr>
+                <a href="aid.html" class="dashboard-nav-item">
+                    <i class="fas fa-money-bill"></i> AID AND KIND
+                </a>
+                <hr>
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <div class="dashboard-app">
+            <header class="dashboard-toolbar">
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="container">
+                    <div class="card">
+                        <div class="bg-white shadow-xl rounded-2xl p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-2xl font-semibold text-gray-800">Donation Cases</h2>
+                                <div class="space-x-2">
+                                    <a
+                                        href="https://docs.google.com/forms/d/e/1FAIpQLSfNNjAoYgruh7xBiuFTzA-Izmtqlexfgv08rNVS_mWlRFKx3Q/viewform?fbzx=-3800908915190165401">
+                                        <button
+                                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow-md transition-all">
+                                            <i class="fas fa-plus-circle mr-2"></i> New Donation
+                                        </button></a>
+                                    <button
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-xl shadow-md transition-all">
+                                        <i class="fas fa-filter mr-2"></i> Filters
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Form Modal -->
+                            <!-- Stats Section -->
+                            <div id="statsSection" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                                <div class="bg-blue-100 text-blue-800 rounded-xl p-4 shadow">
+                                    <h3 class="text-sm font-semibold">Total Cases</h3>
+                                    <p id="statTotalCases" class="text-2xl font-bold">0</p>
+                                </div>
+                                <div class="bg-green-100 text-green-800 rounded-xl p-4 shadow">
+                                    <h3 class="text-sm font-semibold">Total Expenses</h3>
+                                    <p id="statTotalExpenses" class="text-2xl font-bold">0 PKR</p>
+                                </div>
+                                <div class="bg-yellow-100 text-yellow-800 rounded-xl p-4 shadow">
+                                    <h3 class="text-sm font-semibold">Unique Locations</h3>
+                                    <p id="statUniqueLocations" class="text-2xl font-bold">0</p>
+                                </div>
+                                <div class="bg-purple-100 text-purple-800 rounded-xl p-4 shadow">
+                                    <h3 class="text-sm font-semibold">Unique CNICs</h3>
+                                    <p id="statUniqueCNICs" class="text-2xl font-bold">0</p>
+                                </div>
+                            </div>
+
+                            <!-- Table -->
+                            <!-- Filters -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                                <input type="text" id="filterName" placeholder="Search Name"
+                                    class="p-2 border rounded-xl w-full" />
+                                <input type="text" id="filterCNIC" placeholder="Search CNIC"
+                                    class="p-2 border rounded-xl w-full" />
+                                <input type="text" id="filterLocation" placeholder="Search Location"
+                                    class="p-2 border rounded-xl w-full" />
+                                <input type="month" id="filterMonth" class="p-2 border rounded-xl w-full" />
+                            </div>
+
+                            <div class="overflow-auto rounded-lg mt-6">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-100 text-gray-700">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left">Timestamp</th>
+                                            <th class="px-4 py-2 text-left">Name</th>
+                                            <th class="px-4 py-2 text-left">Date</th>
+                                            <th class="px-4 py-2 text-left">CNIC</th>
+                                            <th class="px-4 py-2 text-left">CNIC Pics</th>
+                                            <th class="px-4 py-2 text-left">Location</th>
+                                            <th class="px-4 py-2 text-left">Expenses</th>
+                                            <th class="px-4 py-2 text-left">Case Picture</th>
+                                            <th class="px-4 py-2 text-left">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="donationTableBody"
+                                        class="text-sm text-gray-800 bg-white divide-y divide-gray-100">
+                                        <!-- Rows will be inserted dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Iframe displaying Google Sheet -->
+
+    <script>
+    const SHEET_ID = "1GJ_upKGURZEA3apCyJABXaQ09erhNng5UiekJENTm2k"; // your real sheet ID
+    const API_KEY = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58"; // your real API key
+    const SHEET_NAME = "AID"; // your actual sheet name
+
+    let allRows = [];
+
+    async function fetchDonations() {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            const result = await response.json();
+            const rows = result.values;
+            const header = rows[0];
+            allRows = rows.slice(1).map(row => Object.fromEntries(header.map((h, i) => [h, row[i] || ""])));
+            renderTable(allRows);
+            renderStats(allRows); // ✅ show stats initially
+        } catch (error) {
+            console.error("Error loading data from Google Sheet:", error);
+        }
+    }
+
+    function renderTable(data) {
+        const tbody = document.getElementById("donationTableBody");
+        tbody.innerHTML = "";
+        data.forEach(row => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td class="px-4 py-2">${row.Timestamp}</td>
+                <td class="px-4 py-2">${row.NAME}</td>
+                <td class="px-4 py-2">${row.Date}</td>
+                <td class="px-4 py-2">${row.CNIC}</td>
+                <td class="px-4 py-2">
+                    ${row['CNIC PICS FRONT AND BACK']
+                        ? `<a href="${row['CNIC PICS FRONT AND BACK']}" target="_blank" class="text-blue-600 underline">View</a>`
+                        : "N/A"}
+                </td>
+                <td class="px-4 py-2">${row.Location}</td>
+                <td class="px-4 py-2">${row.EXPENSES}</td>
+                <td class="px-4 py-2">
+                    ${row['Case Picture']
+                        ? `<img src="${row['Case Picture']}" class="w-12 h-12 object-cover rounded-full">`
+                        : "N/A"}
+                </td>
+                <td class="px-4 py-2">${row.Description}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderStats(data) {
+        // Total Cases
+        document.getElementById("statTotalCases").textContent = data.length;
+
+        // Total Expenses (extract number, remove commas, sum it)
+        const totalExpenses = data.reduce((sum, row) => {
+            const expense = parseInt((row.EXPENSES || "0").replace(/,/g, "").replace(/[^\d]/g, ""));
+            return sum + (isNaN(expense) ? 0 : expense);
+        }, 0);
+        document.getElementById("statTotalExpenses").textContent = `${totalExpenses.toLocaleString()} PKR`;
+
+        // Unique Locations
+        const uniqueLocations = new Set(data.map(row => row.Location?.trim()).filter(Boolean));
+        document.getElementById("statUniqueLocations").textContent = uniqueLocations.size;
+
+        // Unique CNICs
+        const uniqueCNICs = new Set(data.map(row => row.CNIC?.trim()).filter(Boolean));
+        document.getElementById("statUniqueCNICs").textContent = uniqueCNICs.size;
+    }
+
+    function applyFilters() {
+        const name = document.getElementById("filterName").value.toLowerCase();
+        const cnic = document.getElementById("filterCNIC").value.toLowerCase();
+        const location = document.getElementById("filterLocation").value.toLowerCase();
+        const month = document.getElementById("filterMonth").value;
+
+        const filtered = allRows.filter(row => {
+            const rowDate = row.Date || "";
+            return (
+                (!name || row.NAME.toLowerCase().includes(name)) &&
+                (!cnic || row.CNIC.toLowerCase().includes(cnic)) &&
+                (!location || row.Location.toLowerCase().includes(location)) &&
+                (!month || rowDate.startsWith(month))
+            );
+        });
+
+        renderTable(filtered);
+        renderStats(filtered); // ✅ also update stats after filtering
+    }
+
+    // Load data and attach event listeners
+    window.onload = () => {
+        fetchDonations();
+        document.getElementById("filterName").addEventListener("input", applyFilters);
+        document.getElementById("filterCNIC").addEventListener("input", applyFilters);
+        document.getElementById("filterLocation").addEventListener("input", applyFilters);
+        document.getElementById("filterMonth").addEventListener("input", applyFilters);
+    };
+</script>
+
+
+
+</body>
+
+</html>

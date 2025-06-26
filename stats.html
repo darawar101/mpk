@@ -56,30 +56,35 @@
                 <img src="Adobe Express - file (1) (1).png" alt="logo" height="80" width="80">
             </a>
         </header>
-        <nav class="dashboard-nav-list">
-            <a href="index.html" class="dashboard-nav-item">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <a href="dashboard.html" class="dashboard-nav-item ">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-            </a>
-            <a href="stats.html" class="dashboard-nav-item">
-                <i class="fas fa-chart-line"></i> Stats
-            </a>
-            <a href="attendance.html" class="dashboard-nav-item">
-                <i class="fas fa-clipboard-check"></i> Attendance
-            </a>
-            <a href="sheet.html" class="dashboard-nav-item">
-                <i class="fas fa-file-excel"></i> Sheet
-            </a>
-            <a href="user-guide.html" class="dashboard-nav-item">
-                <i class="fas fa-book"></i> User Guide
-            </a>
-            <div class="nav-item-divider"></div>
-            <a href="index.html" class="dashboard-nav-item">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </nav>
+       <nav class="dashboard-nav-list">
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="dashboard.html" class="dashboard-nav-item ">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="stats.html" class="dashboard-nav-item">
+                    <i class="fas fa-chart-line"></i> Stats
+                </a>
+                <a href="attendance.html" class="dashboard-nav-item">
+                    <i class="fas fa-clipboard-check"></i> Attendance
+                </a>
+                <a href="sheet.html" class="dashboard-nav-item">
+                    <i class="fas fa-file-excel"></i> Sheet
+                </a>
+                <a href="user-guide.html" class="dashboard-nav-item">
+                    <i class="fas fa-book"></i> User Guide
+                </a>
+                </a>
+                 <hr>
+                <a href="aid.html" class="dashboard-nav-item">
+                    <i class="fas fa-money-bill"></i> AID AND KIND
+                </a>
+              <hr>
+                <a href="index.html" class="dashboard-nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
     </div>
 
     <div class="dashboard-app">
@@ -161,6 +166,10 @@
                         <h3 class="text-lg md:text-xl font-semibold mb-3">Fire Accident</h3>
                         <p id="firecount" class="text-4xl font-bold text-lime-300 number">0</p>
                       </div>
+                      <div class="glass p-6 text-center">
+                        <h3 class="text-lg md:text-xl font-semibold mb-3">Office Meetings</h3>
+                        <p id="meetingscount" class="text-4xl font-bold text-lime-300 number">0</p>
+                      </div>
                     </div>
                   
                     <!-- Chart -->
@@ -185,7 +194,7 @@
     async function fetchFilteredData() {
       const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
       const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
-      const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap", "Rap", "Road Accident", "Fire Incident"];
+      const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap", "Rap", "Road Accident", "Fire Incident", "Meetings"];
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
 
       const month = document.getElementById("monthFilter").value;
@@ -227,6 +236,7 @@
       animateValue("rapcount", 0, counts["Rap"] || 0);
       animateValue("roadcount", 0, counts["Road Accident"] || 0);
       animateValue("firecount", 0, counts["Fire Incident"] || 0);
+      animateValue("meetingscount", 0, counts["Meetings"] || 0);
       animateValue("othersCount", 0, counts["Others Cases"] || 0);
 
       renderChart(counts);
