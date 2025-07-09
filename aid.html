@@ -156,28 +156,27 @@
                             <!-- Table Section -->
                             <!-- ✅ Table Scroll Container -->
                             <!-- Responsive Table Wrapper -->
-                            <div class="w-full overflow-x-auto rounded-lg border border-gray-200">
-                                <table class="min-w-full w-full text-[11px] sm:text-xs md:text-sm text-left text-gray-800">
-
-                                    <thead class="bg-gray-100 text-gray-700">
-                                        <tr>
-                                            <th class="px-3 py-2 hidden md:table-cell">Timestamp</th>
-                                            <th class="px-3 py-2">Name</th>
-                                            <th class="px-3 py-2">Date</th>
-                                            <th class="px-3 py-2">CNIC</th>
-                                            <th class="px-3 py-2 hidden md:table-cell">CNIC Pics</th>
-                                            <th class="px-3 py-2">Location</th>
-                                            <th class="px-3 py-2">Expenses</th>
-                                            <th class="px-3 py-2 hidden md:table-cell">Case Picture</th>
-                                            <th class="px-3 py-2 hidden md:table-cell">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="donationTableBody" class="divide-y divide-gray-100 bg-white">
-                                        <!-- JS rows inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-
+                           
+                           
+<!-- Responsive Table Wrapper -->
+<div class="w-full overflow-x-auto rounded-lg border border-gray-200">
+  <table class="min-w-full text-sm text-left text-gray-800">
+    <thead class="bg-gray-100 text-gray-700">
+      <tr>
+        <th class="px-4 py-2 whitespace-nowrap">Name</th>
+        <th class="px-4 py-2 whitespace-nowrap">Date</th>
+        <th class="px-4 py-2 whitespace-nowrap">CNIC</th>
+        <th class="px-4 py-2 whitespace-nowrap">Location</th>
+        <th class="px-4 py-2 whitespace-nowrap">Expenses</th>
+        <th class="px-4 py-2 hidden md:table-cell">Description</th>
+        <th class="px-4 py-2 hidden md:table-cell">Efforts</th>
+      </tr>
+    </thead>
+    <tbody id="donationTableBody" class="bg-white divide-y divide-gray-100">
+      <!-- JS will insert rows here -->
+    </tbody>
+  </table>
+</div>
 
 
 
@@ -220,24 +219,16 @@
                 data.forEach(row => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-  <td class="px-3 py-2 hidden md:table-cell">${row.Timestamp}</td>
-  <td class="px-3 py-2">${row.NAME}</td>
-  <td class="px-3 py-2">${row.Date}</td>
-  <td class="px-3 py-2">${row.CNIC}</td>
-  <td class="px-3 py-2 hidden md:table-cell">
-    ${row['CNIC PICS FRONT AND BACK']
-                            ? `<a href="${row['CNIC PICS FRONT AND BACK']}" target="_blank" class="text-blue-600 underline">View</a>`
-                            : "N/A"}
-  </td>
-  <td class="px-3 py-2">${row.Location}</td>
-  <td class="px-3 py-2">${row.EXPENSES}</td>
-  <td class="px-3 py-2 hidden md:table-cell">
-    ${row['Case Picture']
-                            ? `<img src="${row['Case Picture']}" class="w-10 h-10 object-cover rounded-md">`
-                            : "N/A"}
-  </td>
-  <td class="px-3 py-2 hidden md:table-cell">${row.Description}</td>
+  <td class="px-4 py-2 whitespace-nowrap">${row.NAME}</td>
+  <td class="px-4 py-2 whitespace-nowrap">${row.Date}</td>
+  <td class="px-4 py-2 whitespace-nowrap">${row.CNIC}</td>
+  <td class="px-4 py-2 whitespace-nowrap">${row.Location}</td>
+  <td class="px-4 py-2 whitespace-nowrap">${row.EXPENSES}</td>
+  <td class="px-4 py-2 hidden md:table-cell whitespace-normal break-words max-w-xs">${row.Description}</td>
+  <td class="px-4 py-2 hidden md:table-cell whitespace-normal break-words max-w-xs">${row.Efforts || "N/A"}</td>
 `;
+
+
 
                     tbody.appendChild(tr);
                 });
