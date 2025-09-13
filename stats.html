@@ -170,6 +170,10 @@
                         <h3 class="text-lg md:text-xl font-semibold mb-3">Office Meetings</h3>
                         <p id="meetingscount" class="text-4xl font-bold text-lime-300 number">0</p>
                       </div>
+                      <div class="glass p-6 text-center">
+                        <h3 class="text-lg md:text-xl font-semibold mb-3">Recover</h3>
+                        <p id="recovercount" class="text-4xl font-bold text-lime-300 number">0</p>
+                      </div>
                     </div>
                   
                     <!-- Chart -->
@@ -194,7 +198,7 @@
     async function fetchFilteredData() {
       const sheetID = "1GAuXwfN3L7Gdbyn7RXP4sWImIwo72T7xgDBN1Uw7vTs";
       const apiKey = "AIzaSyD2A2M4nM0_mUyPopG-9d3_piiljHgCq58";
-      const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap", "Rap", "Road Accident", "Fire Incident", "Meetings"];
+      const sheetNames = ["Protest Cases", "Others Cases", "Land Grabber", "Child Marrige", "Murder", "Sucide", "Force Conversion", "Kidnap", "Rap", "Road Accident", "Fire Incident", "Meetings", "recover"];
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values:batchGet?${sheetNames.map(name => `ranges=${encodeURIComponent(name)}`).join("&")}&key=${apiKey}`;
 
       const month = document.getElementById("monthFilter").value;
@@ -238,6 +242,7 @@
       animateValue("firecount", 0, counts["Fire Incident"] || 0);
       animateValue("meetingscount", 0, counts["Meetings"] || 0);
       animateValue("othersCount", 0, counts["Others Cases"] || 0);
+      animateValue("recovercount", 0, counts["recover"] || 0);
 
       renderChart(counts);
     }
